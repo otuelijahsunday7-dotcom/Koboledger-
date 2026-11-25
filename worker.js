@@ -1276,7 +1276,8 @@ const INDEX_HTML = `<!DOCTYPE html>
     const langSelect = document.getElementById("modal-language-select");
     const regionSelect = document.getElementById("modal-region-select");
     langSelect.value = manualOpen ? (appState.settings.language || "en") : "en";
-    regionSelect.value = `${appState.settings.country || "NG"}|${appState.settings.currencyCode || "NGN"}|${appState.settings.currencySymbol || "₦"}`;
+    regionSelect.value = (appState.settings.country || "NG") + "|" + (appState.settings.currencyCode || "NGN") + "|" + (appState.settings.currencySymbol || "₦");
+    
 
 
     document.getElementById("language-modal").classList.add("open");
