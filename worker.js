@@ -1277,11 +1277,13 @@ const INDEX_HTML = `<!DOCTYPE html>
     const regionSelect = document.getElementById("modal-region-select");
     langSelect.value = manualOpen ? (appState.settings.language || "en") : "en";
     regionSelect.value = `${appState.settings.country || "NG"}|${appState.settings.currencyCode || "NGN"}|${appState.settings.currencySymbol || "₦"}`;
+    
 
     document.getElementById("language-modal").classList.add("open");
   }
 
   function confirmLanguageModal(e) {
+  
     e.preventDefault();
     const chosenLang = document.getElementById("modal-language-select").value || "en";
     const [country, currencyCode, currencySymbol] = document.getElementById("modal-region-select").value.split("|");
