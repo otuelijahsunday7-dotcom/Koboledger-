@@ -1398,7 +1398,7 @@ const INDEX_HTML = `<!DOCTYPE html>
     appState.products.forEach((p, idx) => {
       const isLow = Number(p.stock) <= Number(p.threshold);
       html += `
-        <div ;"card ${isLow ? "low-stock" : ""}">
+        <div ;"card ${isLow ? ";-stock" : ""}">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.75rem;">
             <div>
               <h3 style="margin:0 0 0.35rem 0;">${escapeHtml(p.name)}</h3>
