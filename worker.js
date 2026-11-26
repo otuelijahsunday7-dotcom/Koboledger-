@@ -426,7 +426,6 @@ const INDEX_HTML = `<!DOCTYPE html>
       <strong>iPhone / iPad:</strong> Tap <strong>Share</strong> (square with arrow) then <strong>Add to Home Screen</strong> to install KoboLedger as an app.
     </div>
 
-    <!-- DASHBOARD -->
     <section id="dashboard" class="active">
       <h2 data-i18n="dashboard_title">Business Overview</h2>
       <div class="stat-grid">
@@ -466,14 +465,12 @@ const INDEX_HTML = `<!DOCTYPE html>
       <div id="dashboard-low-stock-list"></div>
     </section>
 
-    <!-- INVENTORY -->
     <section id="inventory">
       <h2 data-i18n="inventory_title">Inventory Management</h2>
       <button type="button" class="btn-primary" onclick="openAddProductModal()" style="width:100%; margin-bottom:1rem;" data-i18n="btn_add_product">+ Add New Product</button>
       <div id="inventory-list"></div>
     </section>
 
-    <!-- MULTI-ITEM NEW SALE -->
     <section id="sales">
       <h2 data-i18n="sales_title">Record New Sale (Multi-Item Cart)</h2>
       <div class="card">
@@ -526,7 +523,6 @@ const INDEX_HTML = `<!DOCTYPE html>
       </form>
     </section>
 
-    <!-- EXPENSES -->
     <section id="expenses">
       <h2 data-i18n="expenses_title">Daily Business Expenses</h2>
       <form id="expense-form" onsubmit="addExpense(event)" class="card">
@@ -555,13 +551,11 @@ const INDEX_HTML = `<!DOCTYPE html>
       <div id="expenses-list"></div>
     </section>
 
-    <!-- DEBT TRACKER -->
     <section id="debt">
       <h2 data-i18n="debt_title">Customer Debt Tracker</h2>
       <div id="debt-list"></div>
     </section>
 
-    <!-- AI ASSISTANT -->
     <section id="ai-assistant">
       <h2 data-i18n="ai_title">AI Business Assistant</h2>
       <p class="muted" data-i18n="ai_subtitle">Powered securely through KoboLedger backend — no personal API key required.</p>
@@ -583,7 +577,6 @@ const INDEX_HTML = `<!DOCTYPE html>
       </div>
     </section>
 
-    <!-- SETTINGS -->
     <section id="settings">
       <h2 data-i18n="settings_title">Shop & Global Settings</h2>
       <form id="settings-form" onsubmit="saveSettings(event)" class="card">
@@ -650,7 +643,6 @@ const INDEX_HTML = `<!DOCTYPE html>
   <a href="#" class="fab" onclick="switchTab('sales'); return false;" aria-label="New Sale">+</a>
 </div>
 
-<!-- FIRST-VISIT LANGUAGE MODAL -->
 <div id="language-modal" class="modal">
   <div class="modal-content">
     <h2 style="margin-top:0;">Choose Language / Langue / Idioma</h2>
@@ -685,7 +677,6 @@ const INDEX_HTML = `<!DOCTYPE html>
   </div>
 </div>
 
-<!-- RECEIPT MODAL -->
 <div id="receipt-modal" class="modal">
   <div class="modal-content">
     <h2 style="margin-top:0;">Generated Receipt</h2>
@@ -697,7 +688,6 @@ const INDEX_HTML = `<!DOCTYPE html>
   </div>
 </div>
 
-<!-- ADD / EDIT PRODUCT MODAL -->
 <div id="product-modal" class="modal">
   <div class="modal-content">
     <h2 id="product-modal-title" style="margin-top:0;">Add Product</h2>
@@ -1384,7 +1374,7 @@ const INDEX_HTML = `<!DOCTYPE html>
     document.getElementById("stat-today-expenses").innerText = formatMoney(todayExpenses);
     document.getElementById("stat-total-debt").innerText = formatMoney(totalDebt);
     document.getElementById("stat-low-stock").innerText = lowStockCount;
-    document.getElementById("stat-low-stock-sub").innerText = `;{lowStockCount} product(s) ; or ; threshold`;
+    document.getElementById("stat-low-stock-sub").innerText = `${lowStockCount} product(s) at or below threshold`;
     document.getElementById("dashboard-low-stock-list").innerHTML = lowStockHtml || '<p class="muted">All stock levels are healthy.</p>';
   }
 
@@ -1398,7 +1388,7 @@ const INDEX_HTML = `<!DOCTYPE html>
     appState.products.forEach((p, idx) => {
       const isLow = Number(p.stock) <= Number(p.threshold);
       html += `
-        <div ;"card ${isLow ? ";-stock" : ""}">
+        <div class="card ${isLow ? "low-stock" : ""}">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.75rem;">
             <div>
               <h3 style="margin:0 0 0.35rem 0;">${escapeHtml(p.name)}</h3>
@@ -1616,26 +1606,22 @@ const INDEX_HTML = `<!DOCTYPE html>
     saveAppData();
 
     const bankLine = appState.settings.bankDetails
-      ? `
-Payment Details:
-${appState.settings.bankDetails}`
+      ? "\nPayment Details:\n" + appState.settings.bankDetails
       : "";
 
     latestReceiptText =
-`====================================
-${(appState.settings.shopName || "KoboLedger").toUpperCase()}
-====================================
-Date: ${new Date().toLocaleString()}
-Ref: ${reference}
-Customer: ${customerName}
-------------------------------------
-${itemLines.join("
-")}
-------------------------------------
-TOTAL: ${formatMoney(grandTotal)}
-Payment: ${paymentMethod}${bankLine}
-
-Thank you for your patronage!`;
+      "====================================\n" +
+      (appState.settings.shopName || "KoboLedger").toUpperCase() + "\n" +
+      "====================================\n" +
+      "Date: " + new Date().toLocaleString() + "\n" +
+      "Ref: " + reference + "\n" +
+      "Customer: " + customerName + "\n" +
+      "------------------------------------\n" +
+      itemLines.join("\n") + "\n" +
+      "------------------------------------\n" +
+      "TOTAL: " + formatMoney(grandTotal) + "\n" +
+      "Payment: " + paymentMethod + bankLine + "\n\n" +
+      "Thank you for your patronage!";
 
     document.getElementById("receipt-preview").innerText = latestReceiptText;
     document.getElementById("receipt-modal").classList.add("open");
@@ -1885,7 +1871,6 @@ Thank you for your patronage!`;
 </html>
 `;
 
-// Minimal valid 1x1 PNG icon placeholder for PWA manifest so /icon-192.png & /icon-512.png never 404
 const TINY_PNG_BASE64 =
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 
