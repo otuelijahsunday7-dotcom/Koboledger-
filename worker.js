@@ -1277,14 +1277,10 @@ const INDEX_HTML = `<!DOCTYPE html>
     const regionSelect = document.getElementById("modal-region-select");
     langSelect.value = manualOpen ? (appState.settings.language || "en") : "en";
     regionSelect.value = (appState.settings.country || "NG") + "|" + (appState.settings.currencyCode || "NGN") + "|" + (appState.settings.currencySymbol || "₦");
-    
-
-
     document.getElementById("language-modal").classList.add("open");
   }
 
   function confirmLanguageModal(e) {
-  
     e.preventDefault();
     const chosenLang = document.getElementById("modal-language-select").value || "en";
     const [country, currencyCode, currencySymbol] = document.getElementById("modal-region-select").value.split("|");
@@ -1376,17 +1372,7 @@ const INDEX_HTML = `<!DOCTYPE html>
     appState.products.forEach((p) => {
       if (Number(p.stock) <= Number(p.threshold)) {
         lowStockCount++;
-                  lowStockHtml += '<div class="card low-stock"><div style="display:flex; justify-content:space-between"><strong>' + escapeHtml(p.name) + '</strong><span class="badge-low">Stock: ' + p.stock + '</span></div></div>';
-                  
-                    <div class="card low-stock">
-  
-  
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <strong>${escapeHtml(p.name)}</strong>
-              <span class="badge-low">Stock: ${p.stock}</span>
-            </div>
-          </div>
-        `;
+        lowStockHtml += '<div class="card low-stock"><div style="display:flex; justify-content:space-between; align-items:center;"><strong>' + escapeHtml(p.name) + '</strong><span class="badge-low">Stock: ' + p.stock + '</span></div></div>';
       }
     });
 
@@ -1630,7 +1616,9 @@ const INDEX_HTML = `<!DOCTYPE html>
     saveAppData();
 
     const bankLine = appState.settings.bankDetails
-      ? `\nPayment Details:\n${appState.settings.bankDetails}`
+      ? `
+Payment Details:
+${appState.settings.bankDetails}`
       : "";
 
     latestReceiptText =
@@ -1641,7 +1629,8 @@ Date: ${new Date().toLocaleString()}
 Ref: ${reference}
 Customer: ${customerName}
 ------------------------------------
-${itemLines.join("\n")}
+${itemLines.join("
+")}
 ------------------------------------
 TOTAL: ${formatMoney(grandTotal)}
 Payment: ${paymentMethod}${bankLine}
