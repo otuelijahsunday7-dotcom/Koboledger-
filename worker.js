@@ -1387,21 +1387,20 @@ const INDEX_HTML = `<!DOCTYPE html>
 
     let html = "";
     appState.products.forEach((p, idx) => {
-      const isLow = Number(p.stock) <= Number(p.threshold);
-      html += `
-        <div class="card ${isLow ? "low-stock" : ""}">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.75rem;">
-            <div>
-              <h3 style="margin:0 0 0.35rem 0;">${escapeHtml(p.name)}</h3>
-              <p style="margin:0;" class="muted">Cost: ${formatMoney(p.costPrice)} • Sell: ${formatMoney(p.sellingPrice)}</p>
-              <p style="margin:0.35rem 0 0 0; font-weight:700;">Stock: <span style="color:${isLow ? "var(--danger)" : "inherit"}">${p.stock}</span> units</p>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:0.35rem;">
-              <button type="button" class="btn-secondary" style="background-color:var(--accent-color); padding:0.3rem 0.65rem;" onclick="openEditProductModal(${idx})">Edit</button>
-              <button type="button" class="btn-secondary" style="background-color:var(--danger); padding:0.3rem 0.65rem;" onclick="deleteProduct(${idx})">Delete</button>
-            </div>
-          </div>
-        </div>
+            html += '<div class="card' + (isLow ? ' low-stock' : '') + '">';
+      html += '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.75rem;">';
+      html += '<div>';
+      html += '<h3 style="margin:0 0 0.35rem 0;">' + escapeHtml(p.name) + '</h3>';
+      html += '<p style="margin:0;" class="muted">Cost: ' + formatMoney(p.costPrice) + ' • Sell: ' + formatMoney(p.sellingPrice) + '</p>';
+      html += '<p style="margin:0.35rem 0 0 0; font-weight:700;">Stock: <span style="color:' + (isLow ? 'var(--danger)' : 'inherit') + '">' + p.stock + '</span> units</p>';
+      html += '</div>';
+      html += '<div style="display:flex; flex-direction:column; gap:0.35rem;">';
+      html += '<button type="button" class="btn-secondary" style="background-color:var(--accent-color); padding:0.3rem 0.65rem;" onclick="openEditProductModal(' + idx + ')">Edit</button>';
+      html += '<button type="button" class="btn-secondary" style="background-color:var(--danger); padding:0.3rem 0.65rem;" onclick="deleteProduct(' + idx + ')">Delete</button>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+
       `;
     });
     document.getElementById("inventory-list").innerHTML = html;
