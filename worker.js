@@ -1384,7 +1384,7 @@ const INDEX_HTML = `<!DOCTYPE html>
     document.getElementById("stat-today-expenses").innerText = formatMoney(todayExpenses);
     document.getElementById("stat-total-debt").innerText = formatMoney(totalDebt);
     document.getElementById("stat-low-stock").innerText = lowStockCount;
-    document.getElementById("stat-low-stock-sub").innerText = `;{lowStockCount} product(s) ; or below threshold`;
+    document.getElementById("stat-low-stock-sub").innerText = `;{lowStockCount} product(s) ; or ; threshold`;
     document.getElementById("dashboard-low-stock-list").innerHTML = lowStockHtml || '<p class="muted">All stock levels are healthy.</p>';
   }
 
