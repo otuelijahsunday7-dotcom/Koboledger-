@@ -1376,7 +1376,8 @@ const INDEX_HTML = `<!DOCTYPE html>
     appState.products.forEach((p) => {
       if (Number(p.stock) <= Number(p.threshold)) {
         lowStockCount++;
-        lowStockHtml += `
+                  lowStockHtml += '<div class="card low-stock"><div style="display:flex; justify-content:space-between"><strong>' + escapeHtml(p.name) + '</strong><span class="badge-low">Stock: ' + p.stock + '</span></div></div>';
+                  
                     <div class="card low-stock">
   
   
