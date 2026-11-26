@@ -1377,7 +1377,8 @@ const INDEX_HTML = `<!DOCTYPE html>
       if (Number(p.stock) <= Number(p.threshold)) {
         lowStockCount++;
         lowStockHtml += `
-          `<div class="card low-stock">`
+                    <div class="card low-stock">
+  
   
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <strong>${escapeHtml(p.name)}</strong>
