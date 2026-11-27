@@ -1,4 +1,4 @@
- const MANIFEST_JSON = {
+const MANIFEST_JSON = {
   name: "KoboLedger",
   short_name: "KoboLedger",
   description: "Global business ledger, inventory, sales, debt tracker & AI.",
@@ -14,10 +14,10 @@
 };
 
 const CURRENCIES = {
-  NGN: { code: "NGN", symbol: "₦", rateFromNGN: 1 },
+  NGN: { code: "NGN", symbol: "NGN ", rateFromNGN: 1 },
   USD: { code: "USD", symbol: "$", rateFromNGN: 1 / 1600 },
-  EUR: { code: "EUR", symbol: "€", rateFromNGN: 1 / 1730 },
-  GBP: { code: "GBP", symbol: "£", rateFromNGN: 1 / 2030 },
+  EUR: { code: "EUR", symbol: "EUR ", rateFromNGN: 1 / 1730 },
+  GBP: { code: "GBP", symbol: "GBP ", rateFromNGN: 1 / 2030 },
   XAF: { code: "XAF", symbol: "FCFA ", rateFromNGN: 615 / 1730 },
   XOF: { code: "XOF", symbol: "CFA ", rateFromNGN: 615 / 1730 },
   KES: { code: "KES", symbol: "KSh ", rateFromNGN: 130 / 1600 },
@@ -31,7 +31,7 @@ const CURRENCIES = {
 };
 
 const SERVICE_WORKER_JS = [
-  'const CACHE_NAME = "koboledger-ui-v1";',
+  'const CACHE_NAME = "koboledger-ui-v2";',
   'self.addEventListener("install", function(e) {',
   '  e.waitUntil(caches.open(CACHE_NAME).then(function(c) { return c.addAll(["/", "/manifest.json"]); }));',
   '  self.skipWaiting();',
@@ -48,7 +48,7 @@ const SERVICE_WORKER_JS = [
   '  if (u.pathname.indexOf("/api/") === 0) return;',
   '  e.respondWith(fetch(e.request).catch(function() { return caches.match(e.request); }));',
   '});'
-].join("\\n");
+].join("\n");
 
 function makeSvgIcon(size) {
   var rx = Math.round(size * 0.22);
@@ -56,11 +56,11 @@ function makeSvgIcon(size) {
   var rad = size * 0.31;
   var sw = Math.max(4, Math.round(size * 0.04));
   var fs = Math.round(size * 0.34);
-  return '<?xml version="1.0" encoding="UTF-8"?>\\n' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">\\n' +
-    '  <rect width="' + size + '" height="' + size + '" rx="' + rx + '" fill="#0f8a4b"/>\\n' +
-    '  <circle cx="' + half + '" cy="' + half + '" r="' + rad + '" fill="none" stroke="#ffffff" stroke-width="' + sw + '"/>\\n' +
-    '  <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-weight="800" font-size="' + fs + '">K</text>\\n' +
+  return '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">\n' +
+    '  <rect width="' + size + '" height="' + size + '" rx="' + rx + '" fill="#0f8a4b"/>\n' +
+    '  <circle cx="' + half + '" cy="' + half + '" r="' + rad + '" fill="none" stroke="#ffffff" stroke-width="' + sw + '"/>\n' +
+    '  <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-weight="800" font-size="' + fs + '">K</text>\n' +
     '</svg>';
 }
 
@@ -100,13 +100,13 @@ const INDEX_HTML = `<!DOCTYPE html>
       flex-wrap: wrap;
     }
     .header-sub select, .header-sub button {
-      background: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.18);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.38);
       border-radius: 8px;
-      padding: 5px 9px;
+      padding: 5px 10px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
     }
     .header-sub select option {
@@ -185,8 +185,8 @@ const INDEX_HTML = `<!DOCTYPE html>
       color: #ffffff;
       border: none;
       border-radius: 12px;
-      padding: 15px 14px;
-      font-size: 16px;
+      padding: 14px 14px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       text-align: center;
@@ -309,14 +309,12 @@ const INDEX_HTML = `<!DOCTYPE html>
         <option value="pt">Portugues</option>
         <option value="sw">Kiswahili</option>
         <option value="ha">Hausa</option>
-        <option value="yo">Yoruba</option>
-        <option value="ig">Igbo</option>
       </select>
       <select id="curSelect" aria-label="Currency" onchange="setCur(this.value)">
-        <option value="NGN">NGN (₦)</option>
+        <option value="NGN">NGN</option>
         <option value="USD">USD ($)</option>
-        <option value="EUR">EUR (€)</option>
-        <option value="GBP">GBP (£)</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
         <option value="XAF">XAF (FCFA)</option>
         <option value="XOF">XOF (CFA)</option>
         <option value="KES">KES</option>
@@ -341,22 +339,21 @@ const INDEX_HTML = `<!DOCTYPE html>
   </div>
 
   <div class="container">
-    <!-- DASHBOARD -->
     <div id="view-dashboard">
       <div class="section-title" id="t-overview">Business Overview</div>
 
       <div class="overview-grid">
         <div class="stat-box">
           <div class="stat-label" id="t-salesToday">Total Sales (Today)</div>
-          <div class="stat-num c-green" id="valSalesToday">₦0</div>
+          <div class="stat-num c-green" id="valSalesToday">0</div>
         </div>
         <div class="stat-box">
           <div class="stat-label" id="t-estProfit">Estimated Profit</div>
-          <div class="stat-num c-green" id="valProfit">₦0</div>
+          <div class="stat-num c-green" id="valProfit">0</div>
         </div>
         <div class="stat-box">
           <div class="stat-label" id="t-debtOwed">Total Debt Owed</div>
-          <div class="stat-num c-red" id="valDebt">₦0</div>
+          <div class="stat-num c-red" id="valDebt">0</div>
         </div>
         <div class="stat-box">
           <div class="stat-label" id="t-lowCount">Low Stock Items</div>
@@ -392,7 +389,6 @@ const INDEX_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- INVENTORY -->
     <div id="view-inventory" style="display:none;">
       <div class="section-title" id="t-invTitle">Inventory</div>
       <div class="card">
@@ -441,7 +437,6 @@ const INDEX_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- NEW SALE / CART -->
     <div id="view-sale" style="display:none;">
       <div class="section-title" id="t-saleTitle">New Sale</div>
       <div class="card">
@@ -458,7 +453,7 @@ const INDEX_HTML = `<!DOCTYPE html>
           <div>
             <label id="l-fromInv">From Stock (Optional)</label>
             <select id="saleInvPick" onchange="pickStockForSale(this.value)">
-              <option value="">-- Custom --</option>
+              <option value="" id="o-custom">-- Custom --</option>
             </select>
           </div>
           <div>
@@ -496,13 +491,12 @@ const INDEX_HTML = `<!DOCTYPE html>
           </table>
         </div>
         <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
-          <strong style="font-size:17px;"><span id="t-totalLabel">Total</span>: <span id="cartTotalVal">₦0</span></strong>
+          <strong style="font-size:17px;"><span id="t-totalLabel">Total</span>: <span id="cartTotalVal">0</span></strong>
           <button type="button" class="btn-green" id="btnCheckout" onclick="completeCartSale()">Complete Sale</button>
         </div>
       </div>
     </div>
 
-    <!-- DEBT TRACKER -->
     <div id="view-debt" style="display:none;">
       <div class="section-title" id="t-debtTitle">Debt Tracker</div>
       <div class="card">
@@ -543,12 +537,11 @@ const INDEX_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- AI -->
     <div id="view-ai" style="display:none;">
       <div class="section-title" id="t-aiTitle">AI Assistant</div>
       <div class="card">
         <div class="chat-box" id="aiChatBox">
-          <div class="chat-msg"><strong>AI:</strong> Ask me about today's sales, estimated profit, debts owed, or low stock.</div>
+          <div class="chat-msg" id="aiWelcome"><strong>AI:</strong> Ask me about today's sales, estimated profit, debts owed, or low stock.</div>
         </div>
         <div style="display:flex;gap:8px;">
           <input type="text" id="aiPrompt" placeholder="Ask about sales, profit, debts, or stock..." />
@@ -579,10 +572,10 @@ const INDEX_HTML = `<!DOCTYPE html>
     };
 
     var SYMBOLS = {
-      NGN: "₦",
+      NGN: "NGN ",
       USD: "$",
-      EUR: "€",
-      GBP: "£",
+      EUR: "EUR ",
+      GBP: "GBP ",
       XAF: "FCFA ",
       XOF: "CFA ",
       KES: "KSh ",
@@ -597,6 +590,7 @@ const INDEX_HTML = `<!DOCTYPE html>
 
     var LANGS = {
       en: {
+        backup: "Backup",
         overview: "Business Overview",
         salesToday: "Total Sales (Today)",
         estProfit: "Estimated Profit",
@@ -607,13 +601,32 @@ const INDEX_HTML = `<!DOCTYPE html>
         manageStock: "Manage Stock",
         lowAlerts: "Low Stock Alerts",
         optimal: "All stock levels are optimal.",
-        tabDash: "Dashboard",
-        tabInv: "Inventory",
-        tabSale: "New Sale",
-        tabDebt: "Debt Tracker",
-        tabAi: "AI"
+        recentTx: "Recent Entries",
+        noEntries: "No entries recorded yet.",
+        date: "Date", type: "Type", note: "Note", amt: "Amount", act: "Action",
+        tabDash: "Dashboard", tabInv: "Inventory", tabSale: "New Sale", tabDebt: "Debt Tracker", tabAi: "AI",
+        invTitle: "Inventory", addStock: "Add Stock Item", itemName: "Item Name", sellPrice: "Selling Price",
+        costPrice: "Cost Price", qty: "Stock Qty", lowAt: "Low Alert At", saveItem: "Save Item",
+        stockList: "Stock Items", item: "Item", price: "Price", status: "Status", low: "Low", ok: "OK",
+        noStock: "No stock items added yet.",
+        saleTitle: "New Sale", quickRecord: "Record Sale / Expense", entryKind: "Entry Type",
+        oSale: "Sale (+)", oExpense: "Expense (-)", oDebt: "Debt / Credit",
+        fromInv: "From Stock (Optional)", custom: "-- Custom --", desc: "Item / Customer Note",
+        sqty: "Qty", sprice: "Amount / Price", addCart: "+ Add to Cart", directSave: "Record Directly",
+        cartBox: "Sale Cart", citem: "Item", cqty: "Qty", ctot: "Total", cdel: "Remove",
+        emptyCart: "Cart is empty.", totalLabel: "Total", checkout: "Complete Sale",
+        debtTitle: "Debt Tracker", addDebt: "Record Debt", dperson: "Person / Customer",
+        damt: "Amount Owed", dnote: "Note", saveDebt: "+ Save Debt", debtList: "Unpaid & Settled Debts",
+        person: "Person", dstat: "Status", unpaid: "Unpaid", paid: "Paid", markPaid: "Mark Paid",
+        noDebts: "No debts recorded.",
+        aiTitle: "AI Assistant",
+        aiWelcome: "Ask me about today's sales, estimated profit, debts owed, or low stock.",
+        askPh: "Ask about sales, profit, debts, or stock...", askBtn: "Ask",
+        needAmt: "Enter a valid amount.", needItem: "Enter item name and price.",
+        needStock: "Enter item name, price, and quantity.", needPerson: "Enter person name and amount."
       },
       fr: {
+        backup: "Sauvegarde",
         overview: "Apercu de l'activite",
         salesToday: "Ventes totales (Aujourd'hui)",
         estProfit: "Benefice estime",
@@ -624,13 +637,32 @@ const INDEX_HTML = `<!DOCTYPE html>
         manageStock: "Gerer le stock",
         lowAlerts: "Alertes stock faible",
         optimal: "Tous les niveaux de stock sont bons.",
-        tabDash: "Tableau",
-        tabInv: "Inventaire",
-        tabSale: "Nouvelle vente",
-        tabDebt: "Dettes",
-        tabAi: "IA"
+        recentTx: "Entrees recentes",
+        noEntries: "Aucune entree enregistree.",
+        date: "Date", type: "Type", note: "Note", amt: "Montant", act: "Action",
+        tabDash: "Tableau", tabInv: "Inventaire", tabSale: "Nouvelle vente", tabDebt: "Dettes", tabAi: "IA",
+        invTitle: "Inventaire", addStock: "Ajouter un article", itemName: "Nom de l'article", sellPrice: "Prix de vente",
+        costPrice: "Prix d'achat", qty: "Quantite", lowAt: "Alerte stock bas", saveItem: "Enregistrer",
+        stockList: "Articles en stock", item: "Article", price: "Prix", status: "Etat", low: "Bas", ok: "OK",
+        noStock: "Aucun article en stock.",
+        saleTitle: "Nouvelle vente", quickRecord: "Enregistrer vente / depense", entryKind: "Type d'entree",
+        oSale: "Vente (+)", oExpense: "Depense (-)", oDebt: "Dette / Credit",
+        fromInv: "Depuis stock (Optionnel)", custom: "-- Personnalise --", desc: "Article / Client",
+        sqty: "Qte", sprice: "Montant / Prix", addCart: "+ Ajouter au panier", directSave: "Enregistrer direct",
+        cartBox: "Panier de vente", citem: "Article", cqty: "Qte", ctot: "Total", cdel: "Retirer",
+        emptyCart: "Le panier est vide.", totalLabel: "Total", checkout: "Valider la vente",
+        debtTitle: "Suivi des dettes", addDebt: "Enregistrer une dette", dperson: "Personne / Client",
+        damt: "Montant du", dnote: "Note", saveDebt: "+ Enregistrer dette", debtList: "Dettes impayees et payees",
+        person: "Personne", dstat: "Statut", unpaid: "Impaye", paid: "Paye", markPaid: "Marquer paye",
+        noDebts: "Aucune dette enregistree.",
+        aiTitle: "Assistant IA",
+        aiWelcome: "Demandez-moi les ventes du jour, le benefice estime, les dettes ou le stock bas.",
+        askPh: "Ventes, benefice, dettes ou stock...", askBtn: "Demander",
+        needAmt: "Entrez un montant valide.", needItem: "Entrez le nom et le prix.",
+        needStock: "Entrez le nom, le prix et la quantite.", needPerson: "Entrez le nom et le montant."
       },
       es: {
+        backup: "Respaldo",
         overview: "Resumen del negocio",
         salesToday: "Ventas de hoy",
         estProfit: "Ganancia estimada",
@@ -641,13 +673,32 @@ const INDEX_HTML = `<!DOCTYPE html>
         manageStock: "Gestionar stock",
         lowAlerts: "Alertas de stock bajo",
         optimal: "Todos los niveles de stock estan bien.",
-        tabDash: "Panel",
-        tabInv: "Inventario",
-        tabSale: "Nueva venta",
-        tabDebt: "Deudas",
-        tabAi: "IA"
+        recentTx: "Movimientos recientes",
+        noEntries: "Sin registros todavia.",
+        date: "Fecha", type: "Tipo", note: "Nota", amt: "Monto", act: "Accion",
+        tabDash: "Panel", tabInv: "Inventario", tabSale: "Nueva venta", tabDebt: "Deudas", tabAi: "IA",
+        invTitle: "Inventario", addStock: "Agregar producto", itemName: "Nombre del producto", sellPrice: "Precio de venta",
+        costPrice: "Precio de costo", qty: "Cantidad", lowAt: "Alerta stock bajo", saveItem: "Guardar",
+        stockList: "Productos en stock", item: "Producto", price: "Precio", status: "Estado", low: "Bajo", ok: "Bien",
+        noStock: "Sin productos todavia.",
+        saleTitle: "Nueva venta", quickRecord: "Registrar venta / gasto", entryKind: "Tipo de registro",
+        oSale: "Venta (+)", oExpense: "Gasto (-)", oDebt: "Deuda / Credito",
+        fromInv: "Desde inventario (Opcional)", custom: "-- Personalizado --", desc: "Producto / Cliente",
+        sqty: "Cant.", sprice: "Monto / Precio", addCart: "+ Agregar al carrito", directSave: "Guardar directo",
+        cartBox: "Carrito de venta", citem: "Producto", cqty: "Cant.", ctot: "Total", cdel: "Quitar",
+        emptyCart: "El carrito esta vacio.", totalLabel: "Total", checkout: "Completar venta",
+        debtTitle: "Control de deudas", addDebt: "Registrar deuda", dperson: "Persona / Cliente",
+        damt: "Monto adeudado", dnote: "Nota", saveDebt: "+ Guardar deuda", debtList: "Deudas pendientes y pagadas",
+        person: "Persona", dstat: "Estado", unpaid: "Pendiente", paid: "Pagado", markPaid: "Marcar pagado",
+        noDebts: "Sin deudas registradas.",
+        aiTitle: "Asistente IA",
+        aiWelcome: "Preguntame por ventas de hoy, ganancia estimada, deudas o stock bajo.",
+        askPh: "Ventas, ganancia, deudas o stock...", askBtn: "Preguntar",
+        needAmt: "Ingresa un monto valido.", needItem: "Ingresa nombre y precio.",
+        needStock: "Ingresa nombre, precio y cantidad.", needPerson: "Ingresa persona y monto."
       },
       pt: {
+        backup: "Backup",
         overview: "Resumo do negocio",
         salesToday: "Vendas (Hoje)",
         estProfit: "Lucro estimado",
@@ -658,13 +709,32 @@ const INDEX_HTML = `<!DOCTYPE html>
         manageStock: "Gerir estoque",
         lowAlerts: "Alertas de estoque baixo",
         optimal: "Todos os niveis de estoque estao otimos.",
-        tabDash: "Painel",
-        tabInv: "Estoque",
-        tabSale: "Nova venda",
-        tabDebt: "Dividas",
-        tabAi: "IA"
+        recentTx: "Lancamentos recentes",
+        noEntries: "Nada registrado ainda.",
+        date: "Data", type: "Tipo", note: "Nota", amt: "Valor", act: "Acao",
+        tabDash: "Painel", tabInv: "Estoque", tabSale: "Nova venda", tabDebt: "Dividas", tabAi: "IA",
+        invTitle: "Estoque", addStock: "Adicionar item", itemName: "Nome do item", sellPrice: "Preco de venda",
+        costPrice: "Preco de custo", qty: "Quantidade", lowAt: "Alerta estoque baixo", saveItem: "Salvar",
+        stockList: "Itens em estoque", item: "Item", price: "Preco", status: "Status", low: "Baixo", ok: "OK",
+        noStock: "Nenhum item adicionado.",
+        saleTitle: "Nova venda", quickRecord: "Registrar venda / despesa", entryKind: "Tipo de lancamento",
+        oSale: "Venda (+)", oExpense: "Despesa (-)", oDebt: "Divida / Fiado",
+        fromInv: "Do estoque (Opcional)", custom: "-- Personalizado --", desc: "Item / Cliente",
+        sqty: "Qtd", sprice: "Valor / Preco", addCart: "+ Adicionar ao carrinho", directSave: "Registrar direto",
+        cartBox: "Carrinho de venda", citem: "Item", cqty: "Qtd", ctot: "Total", cdel: "Remover",
+        emptyCart: "Carrinho vazio.", totalLabel: "Total", checkout: "Concluir venda",
+        debtTitle: "Controle de dividas", addDebt: "Registrar divida", dperson: "Pessoa / Cliente",
+        damt: "Valor devido", dnote: "Nota", saveDebt: "+ Salvar divida", debtList: "Dividas pendentes e pagas",
+        person: "Pessoa", dstat: "Status", unpaid: "Pendente", paid: "Pago", markPaid: "Marcar pago",
+        noDebts: "Nenhuma divida registrada.",
+        aiTitle: "Assistente IA",
+        aiWelcome: "Pergunte sobre vendas de hoje, lucro estimado, dividas ou estoque baixo.",
+        askPh: "Vendas, lucro, dividas ou estoque...", askBtn: "Perguntar",
+        needAmt: "Digite um valor valido.", needItem: "Digite nome e preco.",
+        needStock: "Digite nome, preco e quantidade.", needPerson: "Digite pessoa e valor."
       },
       sw: {
+        backup: "Hifadhi",
         overview: "Muhtasari wa Biashara",
         salesToday: "Mauzo Yote (Leo)",
         estProfit: "Faida Inayokadiriwa",
@@ -675,13 +745,32 @@ const INDEX_HTML = `<!DOCTYPE html>
         manageStock: "Simamia Stoku",
         lowAlerts: "Tahadhari ya Stoku Chache",
         optimal: "Viwango vyote vya stoku viko sawa.",
-        tabDash: "Dashibodi",
-        tabInv: "Stoku",
-        tabSale: "Mauzo Mapya",
-        tabDebt: "Madeni",
-        tabAi: "AI"
+        recentTx: "Rekodi za Hivi Karibuni",
+        noEntries: "Hakuna rekodi bado.",
+        date: "Tarehe", type: "Aina", note: "Maelezo", amt: "Kiasi", act: "Hatua",
+        tabDash: "Dashibodi", tabInv: "Stoku", tabSale: "Mauzo Mapya", tabDebt: "Madeni", tabAi: "AI",
+        invTitle: "Stoku", addStock: "Ongeza Bidhaa", itemName: "Jina la bidhaa", sellPrice: "Bei ya kuuzia",
+        costPrice: "Bei ya kununulia", qty: "Idadi", lowAt: "Tahadhari ikifika", saveItem: "Hifadhi",
+        stockList: "Orodha ya Stoku", item: "Bidhaa", price: "Bei", status: "Hali", low: "Chache", ok: "Sawa",
+        noStock: "Hakuna bidhaa bado.",
+        saleTitle: "Mauzo Mapya", quickRecord: "Rekodi Mauzo / Matumizi", entryKind: "Aina ya rekodi",
+        oSale: "Mauzo (+)", oExpense: "Matumizi (-)", oDebt: "Deni / Mkopo",
+        fromInv: "Kutoka Stoku (Si lazima)", custom: "-- Nyingine --", desc: "Bidhaa / Mteja",
+        sqty: "Idadi", sprice: "Kiasi / Bei", addCart: "+ Weka Kikapuni", directSave: "Rekodi Moja kwa Moja",
+        cartBox: "Kikapu cha Mauzo", citem: "Bidhaa", cqty: "Idadi", ctot: "Jumla", cdel: "Ondoa",
+        emptyCart: "Kikapu hakina kitu.", totalLabel: "Jumla", checkout: "Kamilisha Mauzo",
+        debtTitle: "Ufuatiliaji wa Madeni", addDebt: "Rekodi Deni", dperson: "Mtu / Mteja",
+        damt: "Kiasi cha Deni", dnote: "Maelezo", saveDebt: "+ Hifadhi Deni", debtList: "Madeni Yaliyobaki na Kulipwa",
+        person: "Mtu", dstat: "Hali", unpaid: "Hajlipwa", paid: "Imelipwa", markPaid: "Weka Imelipwa",
+        noDebts: "Hakuna madeni bado.",
+        aiTitle: "Msaidizi wa AI",
+        aiWelcome: "Niulize kuhusu mauzo ya leo, faida, madeni, au stoku chache.",
+        askPh: "Mauzo, faida, madeni, au stoku...", askBtn: "Uliza",
+        needAmt: "Weka kiasi sahihi.", needItem: "Weka jina na bei.",
+        needStock: "Weka jina, bei, na idadi.", needPerson: "Weka jina na kiasi."
       },
       ha: {
+        backup: "Ajiye",
         overview: "Bayani Kan Kasuwanci",
         salesToday: "Jimillar Sayarwa (Yau)",
         estProfit: "Riba Da Ake Sa Rai",
@@ -692,49 +781,33 @@ const INDEX_HTML = `<!DOCTYPE html>
         manageStock: "Kula Da Haja",
         lowAlerts: "Fadakarwar Karancin Haja",
         optimal: "Dukkan kaya suna daidai.",
-        tabDash: "Dashboard",
-        tabInv: "Haja",
-        tabSale: "Sabuwar Sayarwa",
-        tabDebt: "Bashi",
-        tabAi: "AI"
-      },
-      yo: {
-        overview: "Akopọ Iṣowo",
-        salesToday: "Àpapọ̀ Títà (Òní)",
-        estProfit: "Èrè Tí A Fojú Sùn",
-        debtOwed: "Gbèsè Tí Ó Kù",
-        lowCount: "Ọjà Tí Ó Dín Kù",
-        quickActions: "Àwọn Ìgbésẹ̀ Kíákíá",
-        recSale: "+ Kọ Títà",
-        manageStock: "Ṣàkóso Ọjà",
-        lowAlerts: "Ìkìlọ̀ Ọjà Dídín Kù",
-        optimal: "Gbogbo ọjà wà ní ìwọ̀n tó dára.",
-        tabDash: "Dashboard",
-        tabInv: "Ọjà",
-        tabSale: "Títà Tuntun",
-        tabDebt: "Gbèsè",
-        tabAi: "AI"
-      },
-      ig: {
-        overview: "Nchịkọta Azụmaahịa",
-        salesToday: "Ngụkọta Ahịa (Taa)",
-        estProfit: "Uru E Chepụtara",
-        debtOwed: "Ụgwọ Fọdụrụ",
-        lowCount: "Ngwaahịa Dị Ala",
-        quickActions: "Omume Ngwa Ngwa",
-        recSale: "+ Dekọọ Ahịa",
-        manageStock: "Jikwaa Ngwaahịa",
-        lowAlerts: "Ịdọ Aka Ná Ntị Ngwaahịa Dị Ala",
-        optimal: "Ọnụọgụgụ ngwaahịa niile dị mma.",
-        tabDash: "Dashboard",
-        tabInv: "Ngwaahịa",
-        tabSale: "Ahịa Ọhụrụ",
-        tabDebt: "Ụgwọ",
-        tabAi: "AI"
+        recentTx: "Bayanan Kwanan Nan",
+        noEntries: "Ba a rubuta komai ba tukuna.",
+        date: "Kwanan Wata", type: "Nau'i", note: "Bayani", amt: "Adadi", act: "Aiki",
+        tabDash: "Dashboard", tabInv: "Haja", tabSale: "Sabuwar Sayarwa", tabDebt: "Bashi", tabAi: "AI",
+        invTitle: "Haja", addStock: "Kara Kaya", itemName: "Sunan kaya", sellPrice: "Farashin sayarwa",
+        costPrice: "Farashin sayowa", qty: "Yawa", lowAt: "Fadakarwa a", saveItem: "Ajiye",
+        stockList: "Jerin Haja", item: "Kaya", price: "Farashi", status: "Yanayi", low: "Kadan", ok: "Lafiya",
+        noStock: "Ba a saka kaya ba tukuna.",
+        saleTitle: "Sabuwar Sayarwa", quickRecord: "Rubuta Sayarwa / Kashewa", entryKind: "Nau'in rubutu",
+        oSale: "Sayarwa (+)", oExpense: "Kashewa (-)", oDebt: "Bashi",
+        fromInv: "Daga Haja (Idan kana so)", custom: "-- Na musamman --", desc: "Kaya / Abokin ciniki",
+        sqty: "Yawa", sprice: "Adadi / Farashi", addCart: "+ Saka A Kwando", directSave: "Rubuta Kai Tsaye",
+        cartBox: "Kwandonsa Sayarwa", citem: "Kaya", cqty: "Yawa", ctot: "Jimilla", cdel: "Cire",
+        emptyCart: "Kwando babu komai.", totalLabel: "Jimilla", checkout: "Kammala Sayarwa",
+        debtTitle: "Bin Didigin Bashi", addDebt: "Rubuta Bashi", dperson: "Mutum / Abokin ciniki",
+        damt: "Adadin Bashi", dnote: "Bayani", saveDebt: "+ Ajiye Bashi", debtList: "Bashin Da Ba A Biya Ba Da Wanda Aka Biya",
+        person: "Mutum", dstat: "Yanayi", unpaid: "Ba a biya ba", paid: "An biya", markPaid: "An biya",
+        noDebts: "Babu bashi da aka rubuta.",
+        aiTitle: "Mataimakin AI",
+        aiWelcome: "Tambaye ni game da sayarwar yau, riba, bashi, ko karancin kaya.",
+        askPh: "Sayarwa, riba, bashi, ko kaya...", askBtn: "Tambaya",
+        needAmt: "Shigar da adadi daidai.", needItem: "Shigar da suna da farashi.",
+        needStock: "Shigar da suna, farashi, da yawa.", needPerson: "Shigar da suna da adadi."
       }
     };
 
-    var KEY = "koboledger_ui_v1";
+    var KEY = "koboledger_ui_v2";
     var state = {
       lang: "en",
       currency: "NGN",
@@ -754,9 +827,6 @@ const INDEX_HTML = `<!DOCTYPE html>
           if (Array.isArray(p.inventory)) state.inventory = p.inventory;
           if (Array.isArray(p.cart)) state.cart = p.cart;
         }
-      } else {
-        var navLang = (navigator.language || "en").toLowerCase().slice(0, 2);
-        if (LANGS[navLang]) state.lang = navLang;
       }
     } catch (e) {}
 
@@ -768,6 +838,11 @@ const INDEX_HTML = `<!DOCTYPE html>
     function setTxt(id, txt) {
       var el = document.getElementById(id);
       if (el) el.textContent = txt;
+    }
+
+    function setPh(id, txt) {
+      var el = document.getElementById(id);
+      if (el) el.placeholder = txt;
     }
 
     function esc(s) {
@@ -804,7 +879,7 @@ const INDEX_HTML = `<!DOCTYPE html>
         if (view) view.style.display = (n === tabName) ? "block" : "none";
         if (btn) btn.className = "tab-btn" + (n === tabName ? " active" : "");
       }
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo(0, 0);
     }
 
     function setLang(l) {
@@ -837,66 +912,58 @@ const INDEX_HTML = `<!DOCTYPE html>
     }
 
     function recordDirectEntry() {
-      try {
-        var kind = document.getElementById("saleKind").value;
-        var note = document.getElementById("saleNote").value.trim();
-        var qty = parseInt(document.getElementById("saleQty").value, 10) || 1;
-        var amt = parseFloat(document.getElementById("saleAmt").value);
-        if (isNaN(amt) || amt <= 0) {
-          alert("Enter a valid amount.");
-          return;
-        }
-        var totalNGN = toNgn(amt) * qty;
-        var costNGN = totalNGN * 0.7;
-        for (var i = 0; i < state.inventory.length; i++) {
-          if (note && state.inventory[i].name.toLowerCase() === note.toLowerCase()) {
-            costNGN = state.inventory[i].costNGN * qty;
-            if (kind === "sale") {
-              state.inventory[i].qty = Math.max(0, state.inventory[i].qty - qty);
-            }
-            break;
-          }
-        }
-        state.entries.unshift({
-          id: "e_" + Date.now() + "_" + Math.floor(Math.random() * 9999),
-          date: new Date().toISOString().slice(0, 10),
-          type: kind,
-          party: note || (kind === "sale" ? "Sale" : (kind === "expense" ? "Expense" : "Debt")),
-          amountNGN: totalNGN,
-          costNGN: costNGN,
-          status: kind === "debt" ? "unpaid" : "paid"
-        });
-        document.getElementById("saleNote").value = "";
-        document.getElementById("saleAmt").value = "";
-        document.getElementById("saleQty").value = "1";
-        save();
-        openTab("dashboard");
-      } catch (e) {
-        alert("Error saving entry: " + e.message);
+      var kind = document.getElementById("saleKind").value;
+      var note = document.getElementById("saleNote").value.trim();
+      var qty = parseInt(document.getElementById("saleQty").value, 10) || 1;
+      var amt = parseFloat(document.getElementById("saleAmt").value);
+      if (isNaN(amt) || amt <= 0) {
+        alert(tr("needAmt"));
+        return;
       }
+      var totalNGN = toNgn(amt) * qty;
+      var costNGN = totalNGN * 0.7;
+      for (var i = 0; i < state.inventory.length; i++) {
+        if (note && state.inventory[i].name.toLowerCase() === note.toLowerCase()) {
+          costNGN = state.inventory[i].costNGN * qty;
+          if (kind === "sale") {
+            state.inventory[i].qty = Math.max(0, state.inventory[i].qty - qty);
+          }
+          break;
+        }
+      }
+      state.entries.unshift({
+        id: "e_" + Date.now() + "_" + Math.floor(Math.random() * 9999),
+        date: new Date().toISOString().slice(0, 10),
+        type: kind,
+        party: note || (kind === "sale" ? tr("oSale") : (kind === "expense" ? tr("oExpense") : tr("oDebt"))),
+        amountNGN: totalNGN,
+        costNGN: costNGN,
+        status: kind === "debt" ? "unpaid" : "paid"
+      });
+      document.getElementById("saleNote").value = "";
+      document.getElementById("saleAmt").value = "";
+      document.getElementById("saleQty").value = "1";
+      save();
+      openTab("dashboard");
     }
 
     function addToCart() {
-      try {
-        var note = document.getElementById("saleNote").value.trim();
-        var qty = parseInt(document.getElementById("saleQty").value, 10) || 1;
-        var amt = parseFloat(document.getElementById("saleAmt").value);
-        if (!note || isNaN(amt) || amt <= 0) {
-          alert("Enter item name and price.");
-          return;
-        }
-        state.cart.push({
-          name: note,
-          qty: qty,
-          priceNGN: toNgn(amt)
-        });
-        document.getElementById("saleNote").value = "";
-        document.getElementById("saleAmt").value = "";
-        document.getElementById("saleQty").value = "1";
-        save();
-      } catch (e) {
-        alert("Error adding to cart: " + e.message);
+      var note = document.getElementById("saleNote").value.trim();
+      var qty = parseInt(document.getElementById("saleQty").value, 10) || 1;
+      var amt = parseFloat(document.getElementById("saleAmt").value);
+      if (!note || isNaN(amt) || amt <= 0) {
+        alert(tr("needItem"));
+        return;
       }
+      state.cart.push({
+        name: note,
+        qty: qty,
+        priceNGN: toNgn(amt)
+      });
+      document.getElementById("saleNote").value = "";
+      document.getElementById("saleAmt").value = "";
+      document.getElementById("saleQty").value = "1";
+      save();
     }
 
     function delCart(idx) {
@@ -933,32 +1000,28 @@ const INDEX_HTML = `<!DOCTYPE html>
     }
 
     function saveStock() {
-      try {
-        var name = document.getElementById("invName").value.trim();
-        var price = parseFloat(document.getElementById("invPrice").value);
-        var cost = parseFloat(document.getElementById("invCost").value);
-        var qty = parseInt(document.getElementById("invQty").value, 10);
-        var low = parseInt(document.getElementById("invLow").value, 10);
-        if (!name || isNaN(price) || price <= 0 || isNaN(qty) || qty < 0) {
-          alert("Enter item name, price, and quantity.");
-          return;
-        }
-        state.inventory.push({
-          id: "i_" + Date.now() + "_" + Math.floor(Math.random() * 9999),
-          name: name,
-          priceNGN: toNgn(price),
-          costNGN: isNaN(cost) ? toNgn(price) * 0.7 : toNgn(cost),
-          qty: qty,
-          low: isNaN(low) ? 3 : low
-        });
-        document.getElementById("invName").value = "";
-        document.getElementById("invPrice").value = "";
-        document.getElementById("invCost").value = "";
-        document.getElementById("invQty").value = "10";
-        save();
-      } catch (e) {
-        alert("Error saving stock: " + e.message);
+      var name = document.getElementById("invName").value.trim();
+      var price = parseFloat(document.getElementById("invPrice").value);
+      var cost = parseFloat(document.getElementById("invCost").value);
+      var qty = parseInt(document.getElementById("invQty").value, 10);
+      var low = parseInt(document.getElementById("invLow").value, 10);
+      if (!name || isNaN(price) || price <= 0 || isNaN(qty) || qty < 0) {
+        alert(tr("needStock"));
+        return;
       }
+      state.inventory.push({
+        id: "i_" + Date.now() + "_" + Math.floor(Math.random() * 9999),
+        name: name,
+        priceNGN: toNgn(price),
+        costNGN: isNaN(cost) ? toNgn(price) * 0.7 : toNgn(cost),
+        qty: qty,
+        low: isNaN(low) ? 3 : low
+      });
+      document.getElementById("invName").value = "";
+      document.getElementById("invPrice").value = "";
+      document.getElementById("invCost").value = "";
+      document.getElementById("invQty").value = "10";
+      save();
     }
 
     function bumpStock(id, delta) {
@@ -976,30 +1039,26 @@ const INDEX_HTML = `<!DOCTYPE html>
     }
 
     function addDebtEntry() {
-      try {
-        var person = document.getElementById("debtName").value.trim();
-        var amt = parseFloat(document.getElementById("debtAmt").value);
-        var note = document.getElementById("debtNote").value.trim();
-        if (!person || isNaN(amt) || amt <= 0) {
-          alert("Enter person name and amount.");
-          return;
-        }
-        state.entries.unshift({
-          id: "d_" + Date.now(),
-          date: new Date().toISOString().slice(0, 10),
-          type: "debt",
-          party: person + (note ? (" - " + note) : ""),
-          amountNGN: toNgn(amt),
-          costNGN: 0,
-          status: "unpaid"
-        });
-        document.getElementById("debtName").value = "";
-        document.getElementById("debtAmt").value = "";
-        document.getElementById("debtNote").value = "";
-        save();
-      } catch (e) {
-        alert("Error saving debt: " + e.message);
+      var person = document.getElementById("debtName").value.trim();
+      var amt = parseFloat(document.getElementById("debtAmt").value);
+      var note = document.getElementById("debtNote").value.trim();
+      if (!person || isNaN(amt) || amt <= 0) {
+        alert(tr("needPerson"));
+        return;
       }
+      state.entries.unshift({
+        id: "d_" + Date.now(),
+        date: new Date().toISOString().slice(0, 10),
+        type: "debt",
+        party: person + (note ? (" - " + note) : ""),
+        amountNGN: toNgn(amt),
+        costNGN: 0,
+        status: "unpaid"
+      });
+      document.getElementById("debtName").value = "";
+      document.getElementById("debtAmt").value = "";
+      document.getElementById("debtNote").value = "";
+      save();
     }
 
     function settleDebt(id) {
@@ -1055,14 +1114,14 @@ const INDEX_HTML = `<!DOCTYPE html>
           lowNames.push(state.inventory[j].name + " (" + state.inventory[j].qty + ")");
         }
       }
-      var reply = "Today Sales: " + fmt(salesToday) +
-        " | Est. Profit: " + fmt(profit) +
-        " | Debt Owed: " + fmt(debt) +
-        " | Low Stock: " + (lowNames.length ? lowNames.join(", ") : "None");
+      var reply = tr("salesToday") + ": " + fmt(salesToday) +
+        " | " + tr("estProfit") + ": " + fmt(profit) +
+        " | " + tr("debtOwed") + ": " + fmt(debt) +
+        " | " + tr("lowCount") + ": " + (lowNames.length ? lowNames.join(", ") : tr("ok"));
 
       if (box) {
-        box.innerHTML += '<div class="chat-msg"><strong>You:</strong> ' + esc(q) + '</div>';
-        box.innerHTML += '<div class="chat-msg"><strong>AI:</strong> ' + esc(reply) + '</div>';
+        box.innerHTML += '<div class="chat-msg"><strong>' + esc(q) + '</strong></div>';
+        box.innerHTML += '<div class="chat-msg">' + esc(reply) + '</div>';
         box.scrollTop = box.scrollHeight;
       }
       inp.value = "";
@@ -1074,6 +1133,7 @@ const INDEX_HTML = `<!DOCTYPE html>
       if (ls) ls.value = state.lang;
       if (cs) cs.value = state.currency;
 
+      setTxt("btnExport", tr("backup"));
       setTxt("t-overview", tr("overview"));
       setTxt("t-salesToday", tr("salesToday"));
       setTxt("t-estProfit", tr("estProfit"));
@@ -1083,12 +1143,71 @@ const INDEX_HTML = `<!DOCTYPE html>
       setTxt("btnQuickSale", tr("recSale"));
       setTxt("btnQuickStock", tr("manageStock"));
       setTxt("t-lowAlerts", tr("lowAlerts"));
+      setTxt("t-recentTx", tr("recentTx"));
+      setTxt("th-date", tr("date"));
+      setTxt("th-type", tr("type"));
+      setTxt("th-note", tr("note"));
+      setTxt("th-amt", tr("amt"));
+      setTxt("th-act", tr("act"));
 
       setTxt("tabBtn-dashboard", tr("tabDash"));
       setTxt("tabBtn-inventory", tr("tabInv"));
       setTxt("tabBtn-sale", tr("tabSale"));
       setTxt("tabBtn-debt", tr("tabDebt"));
       setTxt("tabBtn-ai", tr("tabAi"));
+
+      setTxt("t-invTitle", tr("invTitle"));
+      setTxt("t-addStock", tr("addStock"));
+      setTxt("l-itemName", tr("itemName"));
+      setTxt("l-sellPrice", tr("sellPrice"));
+      setTxt("l-costPrice", tr("costPrice"));
+      setTxt("l-qty", tr("qty"));
+      setTxt("l-lowAt", tr("lowAt"));
+      setTxt("btnSaveInv", tr("saveItem"));
+      setTxt("t-stockList", tr("stockList"));
+      setTxt("th-item", tr("item"));
+      setTxt("th-price", tr("price"));
+      setTxt("th-qty", tr("qty"));
+      setTxt("th-status", tr("status"));
+      setTxt("th-sact", tr("act"));
+
+      setTxt("t-saleTitle", tr("saleTitle"));
+      setTxt("t-quickRecord", tr("quickRecord"));
+      setTxt("l-entryKind", tr("entryKind"));
+      setTxt("o-sale", tr("oSale"));
+      setTxt("o-expense", tr("oExpense"));
+      setTxt("o-debt", tr("oDebt"));
+      setTxt("l-fromInv", tr("fromInv"));
+      setTxt("o-custom", tr("custom"));
+      setTxt("l-desc", tr("desc"));
+      setTxt("l-sqty", tr("sqty"));
+      setTxt("l-sprice", tr("sprice"));
+      setTxt("btnAddCart", tr("addCart"));
+      setTxt("btnDirectSave", tr("directSave"));
+      setTxt("t-cartBox", tr("cartBox"));
+      setTxt("th-citem", tr("citem"));
+      setTxt("th-cqty", tr("cqty"));
+      setTxt("th-ctot", tr("ctot"));
+      setTxt("th-cdel", tr("cdel"));
+      setTxt("t-totalLabel", tr("totalLabel"));
+      setTxt("btnCheckout", tr("checkout"));
+
+      setTxt("t-debtTitle", tr("debtTitle"));
+      setTxt("t-addDebt", tr("addDebt"));
+      setTxt("l-dperson", tr("dperson"));
+      setTxt("l-damt", tr("damt"));
+      setTxt("l-dnote", tr("dnote"));
+      setTxt("btnSaveDebt", tr("saveDebt"));
+      setTxt("t-debtList", tr("debtList"));
+      setTxt("th-dperson", tr("person"));
+      setTxt("th-dnote", tr("dnote"));
+      setTxt("th-damt", tr("amt"));
+      setTxt("th-dstat", tr("dstat"));
+      setTxt("th-dact", tr("act"));
+
+      setTxt("t-aiTitle", tr("aiTitle"));
+      setPh("aiPrompt", tr("askPh"));
+      setTxt("btnAskAi", tr("askBtn"));
 
       var today = new Date().toISOString().slice(0, 10);
       var salesToday = 0;
@@ -1126,7 +1245,7 @@ const INDEX_HTML = `<!DOCTYPE html>
         } else {
           alertsEl.innerHTML = lowItems.map(function(it) {
             return '<div style="margin-bottom:4px;color:#b91c1c;font-weight:600;">' +
-              esc(it.name) + ": " + it.qty + " left</div>";
+              esc(it.name) + ": " + it.qty + "</div>";
           }).join("");
         }
       }
@@ -1134,12 +1253,13 @@ const INDEX_HTML = `<!DOCTYPE html>
       var txBody = document.getElementById("recentTxBody");
       if (txBody) {
         if (!state.entries.length) {
-          txBody.innerHTML = '<tr><td colspan="5" class="muted">No entries recorded yet.</td></tr>';
+          txBody.innerHTML = '<tr><td colspan="5" class="muted">' + esc(tr("noEntries")) + '</td></tr>';
         } else {
           txBody.innerHTML = state.entries.slice(0, 15).map(function(en) {
+            var kindWord = en.type === "sale" ? tr("oSale") : (en.type === "expense" ? tr("oExpense") : tr("oDebt"));
             return "<tr>" +
               "<td>" + esc(en.date) + "</td>" +
-              "<td>" + esc(String(en.type || "").toUpperCase()) + "</td>" +
+              "<td>" + esc(kindWord) + "</td>" +
               "<td>" + esc(en.party) + "</td>" +
               "<td><strong>" + fmt(en.amountNGN) + "</strong></td>" +
               '<td><button type="button" class="btn-danger" onclick="delEntry(\'' + en.id + '\')">X</button></td>' +
@@ -1150,7 +1270,7 @@ const INDEX_HTML = `<!DOCTYPE html>
 
       var invPick = document.getElementById("saleInvPick");
       if (invPick) {
-        invPick.innerHTML = '<option value="">-- Custom --</option>' +
+        invPick.innerHTML = '<option value="">' + esc(tr("custom")) + '</option>' +
           state.inventory.map(function(it) {
             return '<option value="' + it.id + '">' + esc(it.name) + ' (' + it.qty + ')</option>';
           }).join("");
@@ -1159,7 +1279,7 @@ const INDEX_HTML = `<!DOCTYPE html>
       var invBody = document.getElementById("invTableBody");
       if (invBody) {
         if (!state.inventory.length) {
-          invBody.innerHTML = '<tr><td colspan="5" class="muted">No stock items added yet.</td></tr>';
+          invBody.innerHTML = '<tr><td colspan="5" class="muted">' + esc(tr("noStock")) + '</td></tr>';
         } else {
           invBody.innerHTML = state.inventory.map(function(it) {
             var isLow = it.qty <= it.low;
@@ -1167,7 +1287,7 @@ const INDEX_HTML = `<!DOCTYPE html>
               "<td><strong>" + esc(it.name) + "</strong></td>" +
               "<td>" + fmt(it.priceNGN) + "</td>" +
               "<td>" + it.qty + "</td>" +
-              '<td style="font-weight:700;color:' + (isLow ? "#dc2626" : "#0f8a4b") + '">' + (isLow ? "Low" : "OK") + "</td>" +
+              '<td style="font-weight:700;color:' + (isLow ? "#dc2626" : "#0f8a4b") + '">' + esc(isLow ? tr("low") : tr("ok")) + "</td>" +
               '<td><button type="button" class="btn-outline" onclick="bumpStock(\'' + it.id + '\', 1)">+1</button> ' +
               '<button type="button" class="btn-danger" onclick="delStock(\'' + it.id + '\')">X</button></td>' +
               "</tr>";
@@ -1179,7 +1299,7 @@ const INDEX_HTML = `<!DOCTYPE html>
       var cartSum = 0;
       if (cartBody) {
         if (!state.cart.length) {
-          cartBody.innerHTML = '<tr><td colspan="4" class="muted">Cart is empty.</td></tr>';
+          cartBody.innerHTML = '<tr><td colspan="4" class="muted">' + esc(tr("emptyCart")) + '</td></tr>';
         } else {
           cartBody.innerHTML = state.cart.map(function(c, idx) {
             var sub = c.priceNGN * c.qty;
@@ -1187,7 +1307,7 @@ const INDEX_HTML = `<!DOCTYPE html>
             return "<tr>" +
               "<td>" + esc(c.name) + "</td>" +
               "<td>" + c.qty + "</td>" +
-              "<td>" + fmt(c.priceNGN) + "</td>" +
+              "<td>" + fmt(sub) + "</td>" +
               '<td><button type="button" class="btn-danger" onclick="delCart(' + idx + ')">X</button></td>' +
               "</tr>";
           }).join("");
@@ -1199,7 +1319,7 @@ const INDEX_HTML = `<!DOCTYPE html>
       if (debtBody) {
         var debts = state.entries.filter(function(e) { return e.type === "debt"; });
         if (!debts.length) {
-          debtBody.innerHTML = '<tr><td colspan="5" class="muted">No debts recorded.</td></tr>';
+          debtBody.innerHTML = '<tr><td colspan="5" class="muted">' + esc(tr("noDebts")) + '</td></tr>';
         } else {
           debtBody.innerHTML = debts.map(function(d) {
             var unpaid = d.status !== "paid";
@@ -1207,8 +1327,8 @@ const INDEX_HTML = `<!DOCTYPE html>
               "<td><strong>" + esc(d.party) + "</strong></td>" +
               "<td>" + esc(d.date) + "</td>" +
               "<td>" + fmt(d.amountNGN) + "</td>" +
-              '<td style="font-weight:700;color:' + (unpaid ? "#dc2626" : "#0f8a4b") + '">' + (unpaid ? "Unpaid" : "Paid") + "</td>" +
-              '<td>' + (unpaid ? '<button type="button" class="btn-outline" onclick="settleDebt(\'' + d.id + '\')">Mark Paid</button> ' : '') +
+              '<td style="font-weight:700;color:' + (unpaid ? "#dc2626" : "#0f8a4b") + '">' + esc(unpaid ? tr("unpaid") : tr("paid")) + "</td>" +
+              '<td>' + (unpaid ? '<button type="button" class="btn-outline" onclick="settleDebt(\'' + d.id + '\')">' + esc(tr("markPaid")) + '</button> ' : '') +
               '<button type="button" class="btn-danger" onclick="delEntry(\'' + d.id + '\')">X</button></td>' +
               "</tr>";
           }).join("");
@@ -1249,7 +1369,7 @@ export default {
       });
     }
     if (url.pathname === "/api/health") {
-      return Response.json({ ok: true, app: "koboledger-ui" });
+      return Response.json({ ok: true, app: "koboledger-ui-v2" });
     }
     return new Response(INDEX_HTML, {
       headers: { "Content-Type": "text/html; charset=utf-8" }
