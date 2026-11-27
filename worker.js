@@ -1,4 +1,4 @@
-const MANIFEST_JSON = {
+ const MANIFEST_JSON = {
   name: "KoboLedger",
   short_name: "KoboLedger",
   description: "Global business ledger, cart, stock & assistant.",
@@ -14,25 +14,25 @@ const MANIFEST_JSON = {
 };
 
 const CURRENCIES = {
-  NGN: { code: "NGN", symbol: "₦", rateFromNGN: 1 },
+  NGN: { code: "NGN", symbol: "NGN ", rateFromNGN: 1 },
   USD: { code: "USD", symbol: "$", rateFromNGN: 1 / 1600 },
-  EUR: { code: "EUR", symbol: "€", rateFromNGN: 1 / 1730 },
-  GBP: { code: "GBP", symbol: "£", rateFromNGN: 1 / 2030 },
+  EUR: { code: "EUR", symbol: "EUR ", rateFromNGN: 1 / 1730 },
+  GBP: { code: "GBP", symbol: "GBP ", rateFromNGN: 1 / 2030 },
   XAF: { code: "XAF", symbol: "FCFA ", rateFromNGN: 615 / 1730 },
   XOF: { code: "XOF", symbol: "CFA ", rateFromNGN: 615 / 1730 },
   KES: { code: "KES", symbol: "KSh ", rateFromNGN: 130 / 1600 },
-  GHS: { code: "GHS", symbol: "₵", rateFromNGN: 15.5 / 1600 },
+  GHS: { code: "GHS", symbol: "GHS ", rateFromNGN: 15.5 / 1600 },
   ZAR: { code: "ZAR", symbol: "R", rateFromNGN: 18 / 1600 },
   CLP: { code: "CLP", symbol: "$", rateFromNGN: 960 / 1600 },
   BRL: { code: "BRL", symbol: "R$", rateFromNGN: 5.7 / 1600 },
-  INR: { code: "INR", symbol: "₹", rateFromNGN: 84 / 1600 },
-  CNY: { code: "CNY", symbol: "¥", rateFromNGN: 7.2 / 1600 },
+  INR: { code: "INR", symbol: "INR ", rateFromNGN: 84 / 1600 },
+  CNY: { code: "CNY", symbol: "CNY ", rateFromNGN: 7.2 / 1600 },
   AED: { code: "AED", symbol: "AED ", rateFromNGN: 3.67 / 1600 }
 };
 
 const I18N = {
   en: {
-    subtitle: "Simple global ledger — record entries first",
+    subtitle: "Simple global ledger - record entries first",
     backup: "Save Backup",
     moneyIn: "Money In",
     moneyOut: "Money Out",
@@ -80,31 +80,31 @@ const I18N = {
     enterStock: "Enter item name, price, and stock count."
   },
   fr: {
-    subtitle: "Carnet mondial simple — enregistrez d'abord",
+    subtitle: "Carnet mondial simple - enregistrez d'abord",
     backup: "Sauvegarder",
-    moneyIn: "Entrées",
+    moneyIn: "Entrees",
     moneyOut: "Sorties",
     balance: "Solde",
     tabRecord: "Enregistrer",
     tabCart: "Panier",
     tabStock: "Stock",
     tabHelp: "Assistant",
-    recordTitle: "Nouvelle entrée",
+    recordTitle: "Nouvelle entree",
     kind: "Type",
-    inOpt: "Entrée d'argent (Vente / Reçu)",
-    outOpt: "Sortie d'argent (Dépense / Achat)",
-    debtOpt: "Dette / Crédit",
+    inOpt: "Entree d'argent (Vente / Recu)",
+    outOpt: "Sortie d'argent (Depense / Achat)",
+    debtOpt: "Dette / Credit",
     amount: "Montant",
     note: "Motif / Nom",
     recordNow: "Enregistrer",
-    listTitle: "Entrées enregistrées",
+    listTitle: "Entrees enregistrees",
     date: "Date",
-    details: "Détails",
+    details: "Details",
     action: "Action",
-    emptyRec: "Aucune entrée pour l'instant.",
+    emptyRec: "Aucune entree pour l'instant.",
     cartTitle: "Panier",
     itemName: "Nom de l'article",
-    qty: "Qté",
+    qty: "Qte",
     price: "Prix",
     addItem: "Ajouter",
     total: "Total",
@@ -114,21 +114,21 @@ const I18N = {
     emptyCart: "Le panier est vide.",
     stockTitle: "Stock",
     inHand: "En stock",
-    status: "État",
+    status: "Etat",
     saveItem: "Enregistrer l'article",
-    emptyStock: "Aucun article ajouté.",
+    emptyStock: "Aucun article ajoute.",
     low: "Faible",
     ok: "OK",
     assistantTitle: "Assistant",
-    assistantIntro: "Posez une question sur le solde, le stock faible ou le résumé.",
-    askPlaceholder: "Solde, stock faible ou résumé...",
+    assistantIntro: "Posez une question sur le solde, le stock faible ou le resume.",
+    askPlaceholder: "Solde, stock faible ou resume...",
     send: "Envoyer",
     enterAmount: "Entrez un montant valide.",
-    enterItem: "Entrez le nom, la quantité et le prix.",
-    enterStock: "Entrez le nom, le prix et la quantité."
+    enterItem: "Entrez le nom, la quantite et le prix.",
+    enterStock: "Entrez le nom, le prix et la quantite."
   },
   es: {
-    subtitle: "Registro global simple — anota primero",
+    subtitle: "Registro global simple - anota primero",
     backup: "Respaldar",
     moneyIn: "Ingresos",
     moneyOut: "Gastos",
@@ -141,15 +141,15 @@ const I18N = {
     kind: "Tipo",
     inOpt: "Ingreso (Venta / Cobro)",
     outOpt: "Gasto (Compra / Pago)",
-    debtOpt: "Deuda / Crédito",
+    debtOpt: "Deuda / Credito",
     amount: "Monto",
     note: "Detalle / Nombre",
     recordNow: "Guardar ahora",
     listTitle: "Movimientos guardados",
     date: "Fecha",
     details: "Detalles",
-    action: "Acción",
-    emptyRec: "Sin registros todavía.",
+    action: "Accion",
+    emptyRec: "Sin registros todavia.",
     cartTitle: "Carrito",
     itemName: "Nombre del producto",
     qty: "Cant.",
@@ -159,49 +159,49 @@ const I18N = {
     cartTotal: "Total carrito",
     clear: "Limpiar",
     saveCartSale: "Guardar carrito como venta",
-    emptyCart: "El carrito está vacío.",
+    emptyCart: "El carrito esta vacio.",
     stockTitle: "Inventario",
     inHand: "Disponible",
     status: "Estado",
     saveItem: "Guardar producto",
-    emptyStock: "Sin productos todavía.",
+    emptyStock: "Sin productos todavia.",
     low: "Bajo",
     ok: "Bien",
     assistantTitle: "Asistente",
     assistantIntro: "Pregunta por tu saldo, stock bajo o resumen.",
     askPlaceholder: "Saldo, stock bajo o resumen...",
     send: "Enviar",
-    enterAmount: "Ingresa un monto válido.",
+    enterAmount: "Ingresa un monto valido.",
     enterItem: "Ingresa nombre, cantidad y precio.",
     enterStock: "Ingresa nombre, precio y cantidad."
   },
   pt: {
-    subtitle: "Livro global simples — registre primeiro",
+    subtitle: "Livro global simples - registre primeiro",
     backup: "Backup",
     moneyIn: "Entradas",
-    moneyOut: "Saídas",
+    moneyOut: "Saidas",
     balance: "Saldo",
     tabRecord: "Registrar",
     tabCart: "Carrinho",
     tabStock: "Estoque",
     tabHelp: "Assistente",
-    recordTitle: "Registrar lançamento",
+    recordTitle: "Registrar lancamento",
     kind: "Tipo",
     inOpt: "Entrada (Venda / Recebido)",
-    outOpt: "Saída (Despesa / Compra)",
-    debtOpt: "Dívida / Fiado",
+    outOpt: "Saida (Despesa / Compra)",
+    debtOpt: "Divida / Fiado",
     amount: "Valor",
-    note: "Descrição / Nome",
+    note: "Descricao / Nome",
     recordNow: "Registrar agora",
-    listTitle: "Lançamentos",
+    listTitle: "Lancamentos",
     date: "Data",
     details: "Detalhes",
-    action: "Ação",
+    action: "Acao",
     emptyRec: "Nada registrado ainda.",
     cartTitle: "Carrinho",
     itemName: "Nome do item",
     qty: "Qtd",
-    price: "Preço",
+    price: "Preco",
     addItem: "Adicionar",
     total: "Total",
     cartTotal: "Total do carrinho",
@@ -219,156 +219,12 @@ const I18N = {
     assistantIntro: "Pergunte sobre saldo, estoque baixo ou resumo.",
     askPlaceholder: "Saldo, estoque baixo ou resumo...",
     send: "Enviar",
-    enterAmount: "Digite um valor válido.",
-    enterItem: "Digite nome, quantidade e preço.",
-    enterStock: "Digite nome, preço e estoque."
-  },
-  ar: {
-    subtitle: "دفتر عالمي بسيط — سجّل أولاً",
-    backup: "نسخ احتياطي",
-    moneyIn: "الوارد",
-    moneyOut: "المنصرف",
-    balance: "الرصيد",
-    tabRecord: "تسجيل",
-    tabCart: "السلة",
-    tabStock: "المخزون",
-    tabHelp: "المساعد",
-    recordTitle: "تسجيل عملية",
-    kind: "النوع",
-    inOpt: "وارد (بيع / مقبوضات)",
-    outOpt: "منصرف (مصروف / شراء)",
-    debtOpt: "دين / آجل",
-    amount: "المبلغ",
-    note: "الوصف / الاسم",
-    recordNow: "سجّل الآن",
-    listTitle: "السجلات",
-    date: "التاريخ",
-    details: "التفاصيل",
-    action: "إجراء",
-    emptyRec: "لا توجد سجلات بعد.",
-    cartTitle: "السلة",
-    itemName: "اسم الصنف",
-    qty: "الكمية",
-    price: "السعر",
-    addItem: "إضافة",
-    total: "الإجمالي",
-    cartTotal: "إجمالي السلة",
-    clear: "مسح",
-    saveCartSale: "حفظ السلة كبيع",
-    emptyCart: "السلة فارغة.",
-    stockTitle: "المخزون",
-    inHand: "المتوفر",
-    status: "الحالة",
-    saveItem: "حفظ الصنف",
-    emptyStock: "لا توجد أصناف بعد.",
-    low: "منخفض",
-    ok: "جيد",
-    assistantTitle: "المساعد",
-    assistantIntro: "اسأل عن الرصيد أو نقص المخزون أو الملخص.",
-    askPlaceholder: "الرصيد أو المخزون أو الملخص...",
-    send: "إرسال",
-    enterAmount: "أدخل مبلغاً صحيحاً.",
-    enterItem: "أدخل اسم الصنف والكمية والسعر.",
-    enterStock: "أدخل اسم الصنف والسعر والكمية."
-  },
-  zh: {
-    subtitle: "全球简明账本 —— 先记账",
-    backup: "导出备份",
-    moneyIn: "收入",
-    moneyOut: "支出",
-    balance: "结余",
-    tabRecord: "记账",
-    tabCart: "购物车",
-    tabStock: "库存",
-    tabHelp: "助手",
-    recordTitle: "记录明细",
-    kind: "类型",
-    inOpt: "收入（销售 / 收款）",
-    outOpt: "支出（费用 / 进货）",
-    debtOpt: "欠款 / 赊账",
-    amount: "金额",
-    note: "说明 / 名称",
-    recordNow: "立即记录",
-    listTitle: "已记账目",
-    date: "日期",
-    details: "详情",
-    action: "操作",
-    emptyRec: "暂无记录，请在上方添加。",
-    cartTitle: "购物车",
-    itemName: "商品名称",
-    qty: "数量",
-    price: "单价",
-    addItem: "加入",
-    total: "小计",
-    cartTotal: "购物车合计",
-    clear: "清空",
-    saveCartSale: "将购物车存为销售",
-    emptyCart: "购物车为空。",
-    stockTitle: "库存",
-    inHand: "现有库存",
-    status: "状态",
-    saveItem: "保存商品",
-    emptyStock: "暂无库存商品。",
-    low: "偏低",
-    ok: "正常",
-    assistantTitle: "助手",
-    assistantIntro: "询问结余、低库存或账目摘要。",
-    askPlaceholder: "输入结余、库存或摘要...",
-    send: "发送",
-    enterAmount: "请输入有效金额。",
-    enterItem: "请输入名称、数量和单价。",
-    enterStock: "请输入名称、单价和库存数量。"
-  },
-  hi: {
-    subtitle: "सरल वैश्विक खाता — पहले एंट्री दर्ज करें",
-    backup: "बैकअप",
-    moneyIn: "आवक",
-    moneyOut: "खर्च",
-    balance: "बचाव / बैलेंस",
-    tabRecord: "दर्ज करें",
-    tabCart: "कार्ट",
-    tabStock: "स्टॉक",
-    tabHelp: "सहायक",
-    recordTitle: "एंट्री दर्ज करें",
-    kind: "प्रकार",
-    inOpt: "आवक (बिक्री / मिला)",
-    outOpt: "खर्च (खरीद / भुगतान)",
-    debtOpt: "उधार / बकाया",
-    amount: "राशि",
-    note: "विवरण / नाम",
-    recordNow: "अभी दर्ज करें",
-    listTitle: "दर्ज एंट्री",
-    date: "तारीख",
-    details: "विवरण",
-    action: "कार्रवाई",
-    emptyRec: "अभी कोई एंट्री नहीं है।",
-    cartTitle: "कार्ट",
-    itemName: "सामान का नाम",
-    qty: "मात्रा",
-    price: "कीमत",
-    addItem: "जोड़ें",
-    total: "कुल",
-    cartTotal: "कार्ट कुल",
-    clear: "साफ करें",
-    saveCartSale: "कार्ट को बिक्री में सहेजें",
-    emptyCart: "कार्ट खाली है।",
-    stockTitle: "स्टॉक",
-    inHand: "उपलब्ध",
-    status: "स्थिति",
-    saveItem: "सामान सहेजें",
-    emptyStock: "कोई सामान नहीं जोड़ा गया।",
-    low: "कम",
-    ok: "ठीक",
-    assistantTitle: "सहायक",
-    assistantIntro: "बैलेंस, कम स्टॉक या सारांश के बारे में पूछें।",
-    askPlaceholder: "बैलेंस, स्टॉक या सारांश पूछें...",
-    send: "भेजें",
-    enterAmount: "सही राशि दर्ज करें।",
-    enterItem: "नाम, मात्रा और कीमत दर्ज करें।",
-    enterStock: "नाम, कीमत और स्टॉक दर्ज करें।"
+    enterAmount: "Digite um valor valido.",
+    enterItem: "Digite nome, quantidade e preco.",
+    enterStock: "Digite nome, preco e estoque."
   },
   sw: {
-    subtitle: "Daftari rahisi ya kimataifa — rekodi kwanza",
+    subtitle: "Daftari rahisi ya kimataifa - rekodi kwanza",
     backup: "Hifadhi Nakala",
     moneyIn: "Zilizoingia",
     moneyOut: "Zilizotoka",
@@ -416,7 +272,7 @@ const I18N = {
     enterStock: "Weka jina, bei, na idadi."
   },
   ha: {
-    subtitle: "Littafin lissafi na duniya — fara rubutawa",
+    subtitle: "Littafin lissafi na duniya - fara rubutawa",
     backup: "Ajiye Kwafi",
     moneyIn: "Kudin Da Ya Shigo",
     moneyOut: "Kudin Da Ya Fita",
@@ -462,107 +318,11 @@ const I18N = {
     enterAmount: "Shigar da adadi daidai.",
     enterItem: "Shigar da suna, yawa, da farashi.",
     enterStock: "Shigar da suna, farashi, da yawa."
-  },
-  yo: {
-    subtitle: "Ìwé ìṣirò àgbáyé — kọ àkọsílẹ̀ ní àkọ́kọ́",
-    backup: "Ṣe Àdàkọ",
-    moneyIn: "Owó Tí Ó Wọlé",
-    moneyOut: "Owó Tí Ó Jáde",
-    balance: "Ìyókù Owó",
-    tabRecord: "Kọ Ìṣirò",
-    tabCart: "Àpótí Ọjà",
-    tabStock: "Ọjà Wà",
-    tabHelp: "Olùrànlọ́wọ́",
-    recordTitle: "Kọ Àkọsílẹ̀",
-    kind: "Irú",
-    inOpt: "Owó Tí Ó Wọlé (Títà)",
-    outOpt: "Owó Tí Ó Jáde (Ìnáwó)",
-    debtOpt: "Gbèsè",
-    amount: "Ìye Owó",
-    note: "Àlàyé / Orúkọ",
-    recordNow: "Kọ Sílẹ̀ Báyìí",
-    listTitle: "Àwọn Àkọsílẹ̀",
-    date: "Ọjọ́",
-    details: "Àlàyé",
-    action: "Ìṣe",
-    emptyRec: "Kò sí àkọsílẹ̀ kankan síbẹ̀.",
-    cartTitle: "Àpótí Ọjà",
-    itemName: "Orúkọ ọjà",
-    qty: "Iye",
-    price: "Iye Owó",
-    addItem: "Fi Kún",
-    total: "Àpapọ̀",
-    cartTotal: "Àpapọ̀ Àpótí",
-    clear: "Kó Kúrò",
-    saveCartSale: "Fi Ṣe Títà",
-    emptyCart: "Àpótí ọjà ṣófo.",
-    stockTitle: "Ọjà Wà",
-    inHand: "Ní Ọwọ́",
-    status: "Ipò",
-    saveItem: "Fi Ọjà Pamọ́",
-    emptyStock: "Kò sí ọjà kankan síbẹ̀.",
-    low: "Tí Dín Kù",
-    ok: "Dára",
-    assistantTitle: "Olùrànlọ́wọ́",
-    assistantIntro: "Béèrè nípa ìyókù, ọjà tí ó dín kù, tàbí àkópọ̀.",
-    askPlaceholder: "Béèrè nípa ìyókù tàbí ọjà...",
-    send: "Fì Ránṣẹ́",
-    enterAmount: "Tẹ ìye owó tí ó tọ́.",
-    enterItem: "Tẹ orúkọ, iye, àti owó.",
-    enterStock: "Tẹ orúkọ, owó, àti iye ọjà."
-  },
-  ig: {
-    subtitle: "Akwụkwọ ego ụwa — dee ndekọ mbụ",
-    backup: "Chekwaa Ndabere",
-    moneyIn: "Ego Batara",
-    moneyOut: "Ego Pụtara",
-    balance: "Ego Fọdụrụ",
-    tabRecord: "Dekọọ",
-    tabCart: "Nkata",
-    tabStock: "Ngwaahịa",
-    tabHelp: "Onye Enyemaka",
-    recordTitle: "Dekọọ Ihe Mere",
-    kind: "Ụdị",
-    inOpt: "Ego Batara (Ịre Ahịa)",
-    outOpt: "Ego Pụtara (Mmefu)",
-    debtOpt: "Ụgwọ",
-    amount: "Ego",
-    note: "Ihe O Mere / Aha",
-    recordNow: "Dekọọ Ugbu A",
-    listTitle: "Ihe Ndị E Dekọrọ",
-    date: "Ụbọchị",
-    details: "Nkọwa",
-    action: "Omume",
-    emptyRec: "Enweghị ndekọ ọ bụla ugbu a.",
-    cartTitle: "Nkata",
-    itemName: "Aha ngwaahịa",
-    qty: "Ọnụọgụgụ",
-    price: "Ọnụ Ahịa",
-    addItem: "Tinye",
-    total: "Ngụkọta",
-    cartTotal: "Ngụkọta Nkata",
-    clear: "Kpochapụ",
-    saveCartSale: "Chekwaa Dịka Ịre Ahịa",
-    emptyCart: "Nkata tọgbọ chakoo.",
-    stockTitle: "Ngwaahịa",
-    inHand: "N'Aka",
-    status: "Ọnọdụ",
-    saveItem: "Chekwaa Ngwaahịa",
-    emptyStock: "Enweghị ngwaahịa ọ bụla.",
-    low: "Dị Ala",
-    ok: "Ọ Dị Mma",
-    assistantTitle: "Onye Enyemaka",
-    assistantIntro: "Jụọ gbasara ego fọdụrụ, ngwaahịa dị ala, ma ọ bụ nchịkọta.",
-    askPlaceholder: "Jụọ gbasara ego fọdụrụ ma ọ bụ ngwaahịa...",
-    send: "Ziga",
-    enterAmount: "Tinye ego ziri ezi.",
-    enterItem: "Tinye aha, ọnụọgụgụ, na ọnụ ahịa.",
-    enterStock: "Tinye aha, ọnụ ahịa, na ngwaahịa."
   }
 };
 
 const SERVICE_WORKER_JS = [
-  'const CACHE_NAME = "koboledger-global-v1";',
+  'const CACHE_NAME = "koboledger-global-v2";',
   'self.addEventListener("install", function(e) {',
   '  e.waitUntil(caches.open(CACHE_NAME).then(function(c) { return c.addAll(["/", "/manifest.json"]); }));',
   '  self.skipWaiting();',
@@ -579,7 +339,7 @@ const SERVICE_WORKER_JS = [
   '  if (u.pathname.indexOf("/api/") === 0) return;',
   '  e.respondWith(fetch(e.request).catch(function() { return caches.match(e.request); }));',
   '});'
-].join("\n");
+].join("\\n");
 
 function makeSvgIcon(size) {
   var rx = Math.round(size * 0.22);
@@ -587,11 +347,11 @@ function makeSvgIcon(size) {
   var rad = size * 0.31;
   var sw = Math.max(4, Math.round(size * 0.04));
   var fs = Math.round(size * 0.34);
-  return '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">\n' +
-    '  <rect width="' + size + '" height="' + size + '" rx="' + rx + '" fill="#0f766e"/>\n' +
-    '  <circle cx="' + half + '" cy="' + half + '" r="' + rad + '" fill="none" stroke="#99f6e4" stroke-width="' + sw + '"/>\n' +
-    '  <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-weight="800" font-size="' + fs + '">K</text>\n' +
+  return '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">\\n' +
+    '  <rect width="' + size + '" height="' + size + '" rx="' + rx + '" fill="#0f766e"/>\\n' +
+    '  <circle cx="' + half + '" cy="' + half + '" r="' + rad + '" fill="none" stroke="#99f6e4" stroke-width="' + sw + '"/>\\n' +
+    '  <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-weight="800" font-size="' + fs + '">K</text>\\n' +
     '</svg>';
 }
 
@@ -723,91 +483,85 @@ const INDEX_HTML = `<!DOCTYPE html>
     <div class="topbar">
       <div>
         <h1>KoboLedger</h1>
-        <div class="sub" id="txtSub"></div>
+        <div class="sub" id="txtSub">Simple global ledger - record entries first</div>
       </div>
       <div class="controls">
         <select id="langPick" aria-label="Language">
           <option value="en">English</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="pt">Português</option>
-          <option value="ar">العربية</option>
-          <option value="zh">中文</option>
-          <option value="hi">हिन्दी</option>
+          <option value="fr">Francais</option>
+          <option value="es">Espanol</option>
+          <option value="pt">Portugues</option>
           <option value="sw">Kiswahili</option>
           <option value="ha">Hausa</option>
-          <option value="yo">Yorùbá</option>
-          <option value="ig">Igbo</option>
         </select>
         <select id="currencyPick" aria-label="Currency">
-          <option value="NGN">NGN (₦)</option>
+          <option value="NGN">NGN</option>
           <option value="USD">USD ($)</option>
-          <option value="EUR">EUR (€)</option>
-          <option value="GBP">GBP (£)</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
           <option value="XAF">XAF (FCFA)</option>
           <option value="XOF">XOF (CFA)</option>
-          <option value="KES">KES (KSh)</option>
-          <option value="GHS">GHS (₵)</option>
+          <option value="KES">KES</option>
+          <option value="GHS">GHS</option>
           <option value="ZAR">ZAR (R)</option>
           <option value="CLP">CLP ($)</option>
           <option value="BRL">BRL (R$)</option>
-          <option value="INR">INR (₹)</option>
-          <option value="CNY">CNY (¥)</option>
+          <option value="INR">INR</option>
+          <option value="CNY">CNY</option>
           <option value="AED">AED</option>
         </select>
-        <button type="button" class="btn-dark" id="btnBackup"></button>
+        <button type="button" class="btn-dark" id="btnBackup">Save Backup</button>
       </div>
     </div>
 
     <div class="summary">
-      <div class="box"><small id="lblIn"></small><strong id="sumIn" style="color:#4ade80;"></strong></div>
-      <div class="box"><small id="lblOut"></small><strong id="sumOut" style="color:#f87171;"></strong></div>
-      <div class="box"><small id="lblBal"></small><strong id="sumBal"></strong></div>
+      <div class="box"><small id="lblIn">Money In</small><strong id="sumIn" style="color:#4ade80;">0</strong></div>
+      <div class="box"><small id="lblOut">Money Out</small><strong id="sumOut" style="color:#f87171;">0</strong></div>
+      <div class="box"><small id="lblBal">Balance</small><strong id="sumBal">0</strong></div>
     </div>
 
     <div class="nav">
-      <button type="button" id="tabBtn-record" class="active"></button>
-      <button type="button" id="tabBtn-cart"></button>
-      <button type="button" id="tabBtn-stock"></button>
-      <button type="button" id="tabBtn-help"></button>
+      <button type="button" id="tabBtn-record" class="active">Record</button>
+      <button type="button" id="tabBtn-cart">Cart</button>
+      <button type="button" id="tabBtn-stock">Stock</button>
+      <button type="button" id="tabBtn-help">Assistant</button>
     </div>
 
-    <!-- TAB 1: RECORD FIRST -->
     <div id="tab-record">
       <div class="card">
-        <h2 id="lblRecordTitle"></h2>
+        <h2 id="lblRecordTitle">Record Entry</h2>
         <div class="row">
           <div>
-            <small id="lblKind" style="display:block;color:#94a3b8;margin-bottom:4px;"></small>
+            <small id="lblKind" style="display:block;color:#94a3b8;margin-bottom:4px;">Kind</small>
             <select id="recType" style="width:100%;">
-              <option value="in" id="optIn"></option>
-              <option value="out" id="optOut"></option>
-              <option value="debt" id="optDebt"></option>
+              <option value="in" id="optIn">Money In (Sale / Received)</option>
+              <option value="out" id="optOut">Money Out (Expense / Bought)</option>
+              <option value="debt" id="optDebt">Owing / Credit</option>
             </select>
           </div>
           <div>
-            <small id="lblAmount" style="display:block;color:#94a3b8;margin-bottom:4px;"></small>
-            <input id="recAmount" type="number" step="0.01" style="width:100%;" />
+            <small id="lblAmount" style="display:block;color:#94a3b8;margin-bottom:4px;">Amount</small>
+            <input id="recAmount" type="number" step="0.01" placeholder="5000" style="width:100%;" />
           </div>
           <div>
-            <small id="lblNote" style="display:block;color:#94a3b8;margin-bottom:4px;"></small>
-            <input id="recNote" type="text" style="width:100%;" />
+            <small id="lblNote" style="display:block;color:#94a3b8;margin-bottom:4px;">What For / Name</small>
+            <input id="recNote" type="text" placeholder="e.g. Rice, transport, Musa" style="width:100%;" />
           </div>
         </div>
-        <button type="button" class="btn-green" id="btnAddRecord" style="width:100%;"></button>
+        <button type="button" class="btn-green" id="btnAddRecord" style="width:100%;">Record Now</button>
       </div>
 
       <div class="card">
-        <h2 id="lblListTitle"></h2>
+        <h2 id="lblListTitle">Recorded Entries</h2>
         <div style="overflow-x:auto;">
           <table>
             <thead>
               <tr>
-                <th id="thDate"></th>
-                <th id="thKind"></th>
-                <th id="thDetails"></th>
-                <th id="thAmount"></th>
-                <th id="thAction"></th>
+                <th id="thDate">Date</th>
+                <th id="thKind">Kind</th>
+                <th id="thDetails">Details</th>
+                <th id="thAmount">Amount</th>
+                <th id="thAction">Action</th>
               </tr>
             </thead>
             <tbody id="recList"></tbody>
@@ -816,60 +570,58 @@ const INDEX_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- TAB 2: CART -->
     <div id="tab-cart" style="display:none;">
       <div class="card">
-        <h2 id="lblCartTitle"></h2>
+        <h2 id="lblCartTitle">Cart</h2>
         <div class="row">
-          <input id="cartName" type="text" />
-          <input id="cartQty" type="number" min="1" value="1" />
-          <input id="cartPrice" type="number" step="0.01" />
-          <button type="button" class="btn-teal" id="btnAddCart"></button>
+          <input id="cartName" type="text" placeholder="Item name" />
+          <input id="cartQty" type="number" min="1" value="1" placeholder="Qty" />
+          <input id="cartPrice" type="number" step="0.01" placeholder="Price" />
+          <button type="button" class="btn-teal" id="btnAddCart">Add Item</button>
         </div>
         <div style="overflow-x:auto;">
           <table>
             <thead>
               <tr>
-                <th id="thCartItem"></th>
-                <th id="thCartQty"></th>
-                <th id="thCartPrice"></th>
-                <th id="thCartTotal"></th>
-                <th id="thCartDel"></th>
+                <th id="thCartItem">Item name</th>
+                <th id="thCartQty">Qty</th>
+                <th id="thCartPrice">Price</th>
+                <th id="thCartTotal">Total</th>
+                <th id="thCartDel">Action</th>
               </tr>
             </thead>
             <tbody id="cartList"></tbody>
           </table>
         </div>
         <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <strong><span id="lblCartTotal"></span>: <span id="cartTotal"></span></strong>
+          <strong><span id="lblCartTotal">Cart Total</span>: <span id="cartTotal">0</span></strong>
           <div style="display:flex;gap:8px;">
-            <button type="button" class="btn-dark" id="btnClearCart"></button>
-            <button type="button" class="btn-green" id="btnCheckout"></button>
+            <button type="button" class="btn-dark" id="btnClearCart">Clear</button>
+            <button type="button" class="btn-green" id="btnCheckout">Save Cart as Sale</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: STOCK -->
     <div id="tab-stock" style="display:none;">
       <div class="card">
-        <h2 id="lblStockTitle"></h2>
+        <h2 id="lblStockTitle">Stock</h2>
         <div class="row">
-          <input id="stkName" type="text" />
-          <input id="stkPrice" type="number" step="0.01" />
-          <input id="stkQty" type="number" min="0" value="5" />
-          <input id="stkLow" type="number" min="0" value="2" />
-          <button type="button" class="btn-teal" id="btnSaveStock"></button>
+          <input id="stkName" type="text" placeholder="Item name" />
+          <input id="stkPrice" type="number" step="0.01" placeholder="Price" />
+          <input id="stkQty" type="number" min="0" value="5" placeholder="In Hand" />
+          <input id="stkLow" type="number" min="0" value="2" placeholder="Low" />
+          <button type="button" class="btn-teal" id="btnSaveStock">Save Item</button>
         </div>
         <div style="overflow-x:auto;">
           <table>
             <thead>
               <tr>
-                <th id="thStkItem"></th>
-                <th id="thStkPrice"></th>
-                <th id="thStkHand"></th>
-                <th id="thStkStatus"></th>
-                <th id="thStkAction"></th>
+                <th id="thStkItem">Item name</th>
+                <th id="thStkPrice">Price</th>
+                <th id="thStkHand">In Hand</th>
+                <th id="thStkStatus">Status</th>
+                <th id="thStkAction">Action</th>
               </tr>
             </thead>
             <tbody id="stkList"></tbody>
@@ -878,14 +630,15 @@ const INDEX_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- TAB 4: ASSISTANT -->
     <div id="tab-help" style="display:none;">
       <div class="card">
-        <h2 id="lblAssistantTitle"></h2>
-        <div class="chat-log" id="chatLog"></div>
+        <h2 id="lblAssistantTitle">Assistant</h2>
+        <div class="chat-log" id="chatLog">
+          <div class="chat-line"><span class="who-ai">Assistant:</span> Ask about your balance, low stock, or summary.</div>
+        </div>
         <div style="display:flex;gap:8px;">
-          <input id="chatMsg" type="text" style="flex:1;" />
-          <button type="button" class="btn-teal" id="btnSendChat"></button>
+          <input id="chatMsg" type="text" placeholder="Ask about balance, stock, or summary..." style="flex:1;" />
+          <button type="button" class="btn-teal" id="btnSendChat">Send</button>
         </div>
       </div>
     </div>
@@ -894,7 +647,7 @@ const INDEX_HTML = `<!DOCTYPE html>
   <script>
     var CURRENCIES = ${JSON.stringify(CURRENCIES)};
     var I18N = ${JSON.stringify(I18N)};
-    var STORE_KEY = "koboledger_global_v1";
+    var STORE_KEY = "koboledger_global_v2";
 
     function detectLang() {
       try {
@@ -948,7 +701,7 @@ const INDEX_HTML = `<!DOCTYPE html>
     function fmtMoney(ngnAmount) {
       var c = curObj();
       var v = Number(ngnAmount || 0) * c.rateFromNGN;
-      var noDec = { NGN: 1, XAF: 1, XOF: 1, KES: 1, CLP: 1, INR: 1, JPY: 1 };
+      var noDec = { NGN: 1, XAF: 1, XOF: 1, KES: 1, CLP: 1, INR: 1 };
       var dec = noDec[data.currency] ? 0 : 2;
       return c.symbol + v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
     }
@@ -959,73 +712,78 @@ const INDEX_HTML = `<!DOCTYPE html>
       });
     }
 
+    function setText(id, val) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = val;
+    }
+
     function applyLanguageChrome() {
       document.documentElement.lang = data.lang;
-      document.documentElement.dir = (data.lang === "ar") ? "rtl" : "ltr";
+      setText("txtSub", t("subtitle"));
+      setText("btnBackup", t("backup"));
 
-      document.getElementById("txtSub").textContent = t("subtitle");
-      document.getElementById("btnBackup").textContent = t("backup");
+      setText("lblIn", t("moneyIn"));
+      setText("lblOut", t("moneyOut"));
+      setText("lblBal", t("balance"));
 
-      document.getElementById("lblIn").textContent = t("moneyIn");
-      document.getElementById("lblOut").textContent = t("moneyOut");
-      document.getElementById("lblBal").textContent = t("balance");
+      setText("tabBtn-record", t("tabRecord"));
+      setText("tabBtn-cart", t("tabCart"));
+      setText("tabBtn-stock", t("tabStock"));
+      setText("tabBtn-help", t("tabHelp"));
 
-      document.getElementById("tabBtn-record").textContent = t("tabRecord");
-      document.getElementById("tabBtn-cart").textContent = t("tabCart");
-      document.getElementById("tabBtn-stock").textContent = t("tabStock");
-      document.getElementById("tabBtn-help").textContent = t("tabHelp");
+      setText("lblRecordTitle", t("recordTitle"));
+      setText("lblKind", t("kind"));
+      setText("optIn", t("inOpt"));
+      setText("optOut", t("outOpt"));
+      setText("optDebt", t("debtOpt"));
+      setText("lblAmount", t("amount"));
+      setText("lblNote", t("note"));
+      setText("btnAddRecord", t("recordNow"));
 
-      document.getElementById("lblRecordTitle").textContent = t("recordTitle");
-      document.getElementById("lblKind").textContent = t("kind");
-      document.getElementById("optIn").textContent = t("inOpt");
-      document.getElementById("optOut").textContent = t("outOpt");
-      document.getElementById("optDebt").textContent = t("debtOpt");
-      document.getElementById("lblAmount").textContent = t("amount");
-      document.getElementById("lblNote").textContent = t("note");
-      document.getElementById("btnAddRecord").textContent = t("recordNow");
+      setText("lblListTitle", t("listTitle"));
+      setText("thDate", t("date"));
+      setText("thKind", t("kind"));
+      setText("thDetails", t("details"));
+      setText("thAmount", t("amount"));
+      setText("thAction", t("action"));
 
-      document.getElementById("lblListTitle").textContent = t("listTitle");
-      document.getElementById("thDate").textContent = t("date");
-      document.getElementById("thKind").textContent = t("kind");
-      document.getElementById("thDetails").textContent = t("details");
-      document.getElementById("thAmount").textContent = t("amount");
-      document.getElementById("thAction").textContent = t("action");
+      setText("lblCartTitle", t("cartTitle"));
+      var cartNameEl = document.getElementById("cartName");
+      var cartQtyEl = document.getElementById("cartQty");
+      var cartPriceEl = document.getElementById("cartPrice");
+      if (cartNameEl) cartNameEl.placeholder = t("itemName");
+      if (cartQtyEl) cartQtyEl.placeholder = t("qty");
+      if (cartPriceEl) cartPriceEl.placeholder = t("price");
+      setText("btnAddCart", t("addItem"));
+      setText("thCartItem", t("itemName"));
+      setText("thCartQty", t("qty"));
+      setText("thCartPrice", t("price"));
+      setText("thCartTotal", t("total"));
+      setText("thCartDel", t("action"));
+      setText("lblCartTotal", t("cartTotal"));
+      setText("btnClearCart", t("clear"));
+      setText("btnCheckout", t("saveCartSale"));
 
-      document.getElementById("lblCartTitle").textContent = t("cartTitle");
-      document.getElementById("cartName").placeholder = t("itemName");
-      document.getElementById("cartQty").placeholder = t("qty");
-      document.getElementById("cartPrice").placeholder = t("price");
-      document.getElementById("btnAddCart").textContent = t("addItem");
-      document.getElementById("thCartItem").textContent = t("itemName");
-      document.getElementById("thCartQty").textContent = t("qty");
-      document.getElementById("thCartPrice").textContent = t("price");
-      document.getElementById("thCartTotal").textContent = t("total");
-      document.getElementById("thCartDel").textContent = t("action");
-      document.getElementById("lblCartTotal").textContent = t("cartTotal");
-      document.getElementById("btnClearCart").textContent = t("clear");
-      document.getElementById("btnCheckout").textContent = t("saveCartSale");
+      setText("lblStockTitle", t("stockTitle"));
+      var stkNameEl = document.getElementById("stkName");
+      var stkPriceEl = document.getElementById("stkPrice");
+      var stkQtyEl = document.getElementById("stkQty");
+      var stkLowEl = document.getElementById("stkLow");
+      if (stkNameEl) stkNameEl.placeholder = t("itemName");
+      if (stkPriceEl) stkPriceEl.placeholder = t("price");
+      if (stkQtyEl) stkQtyEl.placeholder = t("inHand");
+      if (stkLowEl) stkLowEl.placeholder = t("low");
+      setText("btnSaveStock", t("saveItem"));
+      setText("thStkItem", t("itemName"));
+      setText("thStkPrice", t("price"));
+      setText("thStkHand", t("inHand"));
+      setText("thStkStatus", t("status"));
+      setText("thStkAction", t("action"));
 
-      document.getElementById("lblStockTitle").textContent = t("stockTitle");
-      document.getElementById("stkName").placeholder = t("itemName");
-      document.getElementById("stkPrice").placeholder = t("price");
-      document.getElementById("stkQty").placeholder = t("inHand");
-      document.getElementById("stkLow").placeholder = t("low");
-      document.getElementById("btnSaveStock").textContent = t("saveItem");
-      document.getElementById("thStkItem").textContent = t("itemName");
-      document.getElementById("thStkPrice").textContent = t("price");
-      document.getElementById("thStkHand").textContent = t("inHand");
-      document.getElementById("thStkStatus").textContent = t("status");
-      document.getElementById("thStkAction").textContent = t("action");
-
-      document.getElementById("lblAssistantTitle").textContent = t("assistantTitle");
-      document.getElementById("chatMsg").placeholder = t("askPlaceholder");
-      document.getElementById("btnSendChat").textContent = t("send");
-
-      var log = document.getElementById("chatLog");
-      if (!log.dataset.seeded) {
-        log.innerHTML = '<div class="chat-line"><span class="who-ai">' + esc(t("tabHelp")) + ':</span> ' + esc(t("assistantIntro")) + '</div>';
-        log.dataset.seeded = "1";
-      }
+      setText("lblAssistantTitle", t("assistantTitle"));
+      var chatMsgEl = document.getElementById("chatMsg");
+      if (chatMsgEl) chatMsgEl.placeholder = t("askPlaceholder");
+      setText("btnSendChat", t("send"));
     }
 
     function showTab(name) {
@@ -1046,7 +804,6 @@ const INDEX_HTML = `<!DOCTYPE html>
 
     document.getElementById("langPick").onchange = function(e) {
       data.lang = e.target.value;
-      document.getElementById("chatLog").dataset.seeded = "";
       saveLocal();
     };
 
@@ -1228,10 +985,13 @@ const INDEX_HTML = `<!DOCTYPE html>
           '<td><button type="button" class="btn-red" onclick="delRecord(\'' + r.id + '\')">X</button></td>' +
           "</tr>";
       }
-      document.getElementById("recList").innerHTML = recHtml || '<tr><td colspan="5" class="empty">' + esc(t("emptyRec")) + '</td></tr>';
-      document.getElementById("sumIn").textContent = fmtMoney(totalIn);
-      document.getElementById("sumOut").textContent = fmtMoney(totalOut);
-      document.getElementById("sumBal").textContent = fmtMoney(totalIn - totalOut);
+      setText("sumIn", fmtMoney(totalIn));
+      setText("sumOut", fmtMoney(totalOut));
+      setText("sumBal", fmtMoney(totalIn - totalOut));
+      var recListEl = document.getElementById("recList");
+      if (recListEl) {
+        recListEl.innerHTML = recHtml || '<tr><td colspan="5" class="empty">' + esc(t("emptyRec")) + '</td></tr>';
+      }
 
       var cartHtml = "";
       var cartSum = 0;
@@ -1247,8 +1007,11 @@ const INDEX_HTML = `<!DOCTYPE html>
           '<td><button type="button" class="btn-red" onclick="delCart(' + c + ')">X</button></td>' +
           "</tr>";
       }
-      document.getElementById("cartList").innerHTML = cartHtml || '<tr><td colspan="5" class="empty">' + esc(t("emptyCart")) + '</td></tr>';
-      document.getElementById("cartTotal").textContent = fmtMoney(cartSum);
+      var cartListEl = document.getElementById("cartList");
+      if (cartListEl) {
+        cartListEl.innerHTML = cartHtml || '<tr><td colspan="5" class="empty">' + esc(t("emptyCart")) + '</td></tr>';
+      }
+      setText("cartTotal", fmtMoney(cartSum));
 
       var stkHtml = "";
       for (var s = 0; s < data.stock.length; s++) {
@@ -1263,7 +1026,10 @@ const INDEX_HTML = `<!DOCTYPE html>
           '<button type="button" class="btn-red" onclick="delStock(\'' + st.id + '\')">X</button></td>' +
           "</tr>";
       }
-      document.getElementById("stkList").innerHTML = stkHtml || '<tr><td colspan="5" class="empty">' + esc(t("emptyStock")) + '</td></tr>';
+      var stkListEl = document.getElementById("stkList");
+      if (stkListEl) {
+        stkListEl.innerHTML = stkHtml || '<tr><td colspan="5" class="empty">' + esc(t("emptyStock")) + '</td></tr>';
+      }
     }
 
     if ("serviceWorker" in navigator) {
@@ -1299,10 +1065,10 @@ export default {
       });
     }
     if (url.pathname === "/api/health") {
-      return Response.json({ ok: true, app: "koboledger-global" });
+      return Response.json({ ok: true, app: "koboledger-global-v2" });
     }
     return new Response(INDEX_HTML, {
       headers: { "Content-Type": "text/html; charset=utf-8" }
     });
   }
-};
+};     
