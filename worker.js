@@ -1,12 +1,12 @@
  const MANIFEST_JSON = {
   name: "KoboLedger",
   short_name: "KoboLedger",
-  description: "Global business ledger, cart, stock & assistant.",
+  description: "Global business ledger, inventory, sales, debt tracker & AI.",
   start_url: "/",
   scope: "/",
   display: "standalone",
-  background_color: "#0b1120",
-  theme_color: "#0f766e",
+  background_color: "#f3f4f6",
+  theme_color: "#0f8a4b",
   icons: [
     { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any maskable" },
     { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any maskable" }
@@ -14,10 +14,10 @@
 };
 
 const CURRENCIES = {
-  NGN: { code: "NGN", symbol: "NGN ", rateFromNGN: 1 },
+  NGN: { code: "NGN", symbol: "₦", rateFromNGN: 1 },
   USD: { code: "USD", symbol: "$", rateFromNGN: 1 / 1600 },
-  EUR: { code: "EUR", symbol: "EUR ", rateFromNGN: 1 / 1730 },
-  GBP: { code: "GBP", symbol: "GBP ", rateFromNGN: 1 / 2030 },
+  EUR: { code: "EUR", symbol: "€", rateFromNGN: 1 / 1730 },
+  GBP: { code: "GBP", symbol: "£", rateFromNGN: 1 / 2030 },
   XAF: { code: "XAF", symbol: "FCFA ", rateFromNGN: 615 / 1730 },
   XOF: { code: "XOF", symbol: "CFA ", rateFromNGN: 615 / 1730 },
   KES: { code: "KES", symbol: "KSh ", rateFromNGN: 130 / 1600 },
@@ -30,299 +30,8 @@ const CURRENCIES = {
   AED: { code: "AED", symbol: "AED ", rateFromNGN: 3.67 / 1600 }
 };
 
-const I18N = {
-  en: {
-    subtitle: "Simple global ledger - record entries first",
-    backup: "Save Backup",
-    moneyIn: "Money In",
-    moneyOut: "Money Out",
-    balance: "Balance",
-    tabRecord: "Record",
-    tabCart: "Cart",
-    tabStock: "Stock",
-    tabHelp: "Assistant",
-    recordTitle: "Record Entry",
-    kind: "Kind",
-    inOpt: "Money In (Sale / Received)",
-    outOpt: "Money Out (Expense / Bought)",
-    debtOpt: "Owing / Credit",
-    amount: "Amount",
-    note: "What For / Name",
-    recordNow: "Record Now",
-    listTitle: "Recorded Entries",
-    date: "Date",
-    details: "Details",
-    action: "Action",
-    emptyRec: "Nothing recorded yet. Add your entry above.",
-    cartTitle: "Cart",
-    itemName: "Item name",
-    qty: "Qty",
-    price: "Price",
-    addItem: "Add Item",
-    total: "Total",
-    cartTotal: "Cart Total",
-    clear: "Clear",
-    saveCartSale: "Save Cart as Sale",
-    emptyCart: "Cart is empty.",
-    stockTitle: "Stock",
-    inHand: "In Hand",
-    status: "Status",
-    saveItem: "Save Item",
-    emptyStock: "No items added yet.",
-    low: "Low",
-    ok: "OK",
-    assistantTitle: "Assistant",
-    assistantIntro: "Ask about your balance, low stock, or summary.",
-    askPlaceholder: "Ask about balance, stock, or summary...",
-    send: "Send",
-    enterAmount: "Enter a valid amount.",
-    enterItem: "Enter item name, quantity, and price.",
-    enterStock: "Enter item name, price, and stock count."
-  },
-  fr: {
-    subtitle: "Carnet mondial simple - enregistrez d'abord",
-    backup: "Sauvegarder",
-    moneyIn: "Entrees",
-    moneyOut: "Sorties",
-    balance: "Solde",
-    tabRecord: "Enregistrer",
-    tabCart: "Panier",
-    tabStock: "Stock",
-    tabHelp: "Assistant",
-    recordTitle: "Nouvelle entree",
-    kind: "Type",
-    inOpt: "Entree d'argent (Vente / Recu)",
-    outOpt: "Sortie d'argent (Depense / Achat)",
-    debtOpt: "Dette / Credit",
-    amount: "Montant",
-    note: "Motif / Nom",
-    recordNow: "Enregistrer",
-    listTitle: "Entrees enregistrees",
-    date: "Date",
-    details: "Details",
-    action: "Action",
-    emptyRec: "Aucune entree pour l'instant.",
-    cartTitle: "Panier",
-    itemName: "Nom de l'article",
-    qty: "Qte",
-    price: "Prix",
-    addItem: "Ajouter",
-    total: "Total",
-    cartTotal: "Total panier",
-    clear: "Vider",
-    saveCartSale: "Valider la vente",
-    emptyCart: "Le panier est vide.",
-    stockTitle: "Stock",
-    inHand: "En stock",
-    status: "Etat",
-    saveItem: "Enregistrer l'article",
-    emptyStock: "Aucun article ajoute.",
-    low: "Faible",
-    ok: "OK",
-    assistantTitle: "Assistant",
-    assistantIntro: "Posez une question sur le solde, le stock faible ou le resume.",
-    askPlaceholder: "Solde, stock faible ou resume...",
-    send: "Envoyer",
-    enterAmount: "Entrez un montant valide.",
-    enterItem: "Entrez le nom, la quantite et le prix.",
-    enterStock: "Entrez le nom, le prix et la quantite."
-  },
-  es: {
-    subtitle: "Registro global simple - anota primero",
-    backup: "Respaldar",
-    moneyIn: "Ingresos",
-    moneyOut: "Gastos",
-    balance: "Saldo",
-    tabRecord: "Registrar",
-    tabCart: "Carrito",
-    tabStock: "Inventario",
-    tabHelp: "Asistente",
-    recordTitle: "Anotar movimiento",
-    kind: "Tipo",
-    inOpt: "Ingreso (Venta / Cobro)",
-    outOpt: "Gasto (Compra / Pago)",
-    debtOpt: "Deuda / Credito",
-    amount: "Monto",
-    note: "Detalle / Nombre",
-    recordNow: "Guardar ahora",
-    listTitle: "Movimientos guardados",
-    date: "Fecha",
-    details: "Detalles",
-    action: "Accion",
-    emptyRec: "Sin registros todavia.",
-    cartTitle: "Carrito",
-    itemName: "Nombre del producto",
-    qty: "Cant.",
-    price: "Precio",
-    addItem: "Agregar",
-    total: "Total",
-    cartTotal: "Total carrito",
-    clear: "Limpiar",
-    saveCartSale: "Guardar carrito como venta",
-    emptyCart: "El carrito esta vacio.",
-    stockTitle: "Inventario",
-    inHand: "Disponible",
-    status: "Estado",
-    saveItem: "Guardar producto",
-    emptyStock: "Sin productos todavia.",
-    low: "Bajo",
-    ok: "Bien",
-    assistantTitle: "Asistente",
-    assistantIntro: "Pregunta por tu saldo, stock bajo o resumen.",
-    askPlaceholder: "Saldo, stock bajo o resumen...",
-    send: "Enviar",
-    enterAmount: "Ingresa un monto valido.",
-    enterItem: "Ingresa nombre, cantidad y precio.",
-    enterStock: "Ingresa nombre, precio y cantidad."
-  },
-  pt: {
-    subtitle: "Livro global simples - registre primeiro",
-    backup: "Backup",
-    moneyIn: "Entradas",
-    moneyOut: "Saidas",
-    balance: "Saldo",
-    tabRecord: "Registrar",
-    tabCart: "Carrinho",
-    tabStock: "Estoque",
-    tabHelp: "Assistente",
-    recordTitle: "Registrar lancamento",
-    kind: "Tipo",
-    inOpt: "Entrada (Venda / Recebido)",
-    outOpt: "Saida (Despesa / Compra)",
-    debtOpt: "Divida / Fiado",
-    amount: "Valor",
-    note: "Descricao / Nome",
-    recordNow: "Registrar agora",
-    listTitle: "Lancamentos",
-    date: "Data",
-    details: "Detalhes",
-    action: "Acao",
-    emptyRec: "Nada registrado ainda.",
-    cartTitle: "Carrinho",
-    itemName: "Nome do item",
-    qty: "Qtd",
-    price: "Preco",
-    addItem: "Adicionar",
-    total: "Total",
-    cartTotal: "Total do carrinho",
-    clear: "Limpar",
-    saveCartSale: "Salvar carrinho como venda",
-    emptyCart: "Carrinho vazio.",
-    stockTitle: "Estoque",
-    inHand: "Em estoque",
-    status: "Status",
-    saveItem: "Salvar item",
-    emptyStock: "Nenhum item adicionado.",
-    low: "Baixo",
-    ok: "OK",
-    assistantTitle: "Assistente",
-    assistantIntro: "Pergunte sobre saldo, estoque baixo ou resumo.",
-    askPlaceholder: "Saldo, estoque baixo ou resumo...",
-    send: "Enviar",
-    enterAmount: "Digite um valor valido.",
-    enterItem: "Digite nome, quantidade e preco.",
-    enterStock: "Digite nome, preco e estoque."
-  },
-  sw: {
-    subtitle: "Daftari rahisi ya kimataifa - rekodi kwanza",
-    backup: "Hifadhi Nakala",
-    moneyIn: "Zilizoingia",
-    moneyOut: "Zilizotoka",
-    balance: "Salio",
-    tabRecord: "Rekodi",
-    tabCart: "Kikapu",
-    tabStock: "Stoku",
-    tabHelp: "Msaidizi",
-    recordTitle: "Rekodi Muamala",
-    kind: "Aina",
-    inOpt: "Zilizoingia (Mauzo / Malipo)",
-    outOpt: "Zilizotoka (Matumizi / Manunuzi)",
-    debtOpt: "Deni / Mkopo",
-    amount: "Kiasi",
-    note: "Maelezo / Jina",
-    recordNow: "Rekodi Sasa",
-    listTitle: "Zilizorekodiwa",
-    date: "Tarehe",
-    details: "Maelezo",
-    action: "Hatua",
-    emptyRec: "Hakuna rekodi bado.",
-    cartTitle: "Kikapu",
-    itemName: "Jina la bidhaa",
-    qty: "Idadi",
-    price: "Bei",
-    addItem: "Ongeza",
-    total: "Jumla",
-    cartTotal: "Jumla ya Kikapu",
-    clear: "Futa",
-    saveCartSale: "Hifadhi Kikapu kama Mauzo",
-    emptyCart: "Kikapu hakina kitu.",
-    stockTitle: "Stoku",
-    inHand: "Zilizopo",
-    status: "Hali",
-    saveItem: "Hifadhi Bidhaa",
-    emptyStock: "Hakuna bidhaa bado.",
-    low: "Chache",
-    ok: "Sawa",
-    assistantTitle: "Msaidizi",
-    assistantIntro: "Uliza kuhusu salio, stoku chache, au muhtasari.",
-    askPlaceholder: "Uliza salio, stoku, au muhtasari...",
-    send: "Tuma",
-    enterAmount: "Weka kiasi sahihi.",
-    enterItem: "Weka jina, idadi, na bei.",
-    enterStock: "Weka jina, bei, na idadi."
-  },
-  ha: {
-    subtitle: "Littafin lissafi na duniya - fara rubutawa",
-    backup: "Ajiye Kwafi",
-    moneyIn: "Kudin Da Ya Shigo",
-    moneyOut: "Kudin Da Ya Fita",
-    balance: "Ragowar Kudi",
-    tabRecord: "Rubuta",
-    tabCart: "Kwando",
-    tabStock: "Haja",
-    tabHelp: "Mataimaki",
-    recordTitle: "Rubuta Bayani",
-    kind: "Nau'i",
-    inOpt: "Kudin Da Ya Shigo (Sayarwa)",
-    outOpt: "Kudin Da Ya Fita (Kashewa)",
-    debtOpt: "Bashi",
-    amount: "Adadi",
-    note: "Dalili / Suna",
-    recordNow: "Rubuta Yanzu",
-    listTitle: "Abubuwan Da Aka Rubuta",
-    date: "Kwanan Wata",
-    details: "Bayani",
-    action: "Aiki",
-    emptyRec: "Ba a rubuta komai ba tukuna.",
-    cartTitle: "Kwando",
-    itemName: "Sunan kaya",
-    qty: "Yawa",
-    price: "Farashi",
-    addItem: "Kara",
-    total: "Jimilla",
-    cartTotal: "Jimillar Kwando",
-    clear: "Share",
-    saveCartSale: "Ajiye Kwando A Matsayin Sayarwa",
-    emptyCart: "Kwando babu komai.",
-    stockTitle: "Haja",
-    inHand: "A Hannu",
-    status: "Yanayi",
-    saveItem: "Ajiye Kaya",
-    emptyStock: "Ba a saka kaya ba tukuna.",
-    low: "Ya Yi Kadan",
-    ok: "Lafiya",
-    assistantTitle: "Mataimaki",
-    assistantIntro: "Tambaya game da ragowa, karancin kaya, ko jimilla.",
-    askPlaceholder: "Tambayi ragowa, kaya, ko jimilla...",
-    send: "Aika",
-    enterAmount: "Shigar da adadi daidai.",
-    enterItem: "Shigar da suna, yawa, da farashi.",
-    enterStock: "Shigar da suna, farashi, da yawa."
-  }
-};
-
 const SERVICE_WORKER_JS = [
-  'const CACHE_NAME = "koboledger-global-v2";',
+  'const CACHE_NAME = "koboledger-ui-v1";',
   'self.addEventListener("install", function(e) {',
   '  e.waitUntil(caches.open(CACHE_NAME).then(function(c) { return c.addAll(["/", "/manifest.json"]); }));',
   '  self.skipWaiting();',
@@ -349,8 +58,8 @@ function makeSvgIcon(size) {
   var fs = Math.round(size * 0.34);
   return '<?xml version="1.0" encoding="UTF-8"?>\\n' +
     '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">\\n' +
-    '  <rect width="' + size + '" height="' + size + '" rx="' + rx + '" fill="#0f766e"/>\\n' +
-    '  <circle cx="' + half + '" cy="' + half + '" r="' + rad + '" fill="none" stroke="#99f6e4" stroke-width="' + sw + '"/>\\n' +
+    '  <rect width="' + size + '" height="' + size + '" rx="' + rx + '" fill="#0f8a4b"/>\\n' +
+    '  <circle cx="' + half + '" cy="' + half + '" r="' + rad + '" fill="none" stroke="#ffffff" stroke-width="' + sw + '"/>\\n' +
     '  <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-weight="800" font-size="' + fs + '">K</text>\\n' +
     '</svg>';
 }
@@ -362,673 +71,1148 @@ const INDEX_HTML = `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KoboLedger</title>
   <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#0f766e" />
+  <meta name="theme-color" content="#0f8a4b" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: #0b1120;
-      color: #f8fafc;
-      padding: 16px;
-      padding-bottom: 60px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+      padding-bottom: 90px;
     }
-    .wrap { max-width: 920px; margin: 0 auto; }
-    .topbar {
+    .header {
+      background: #0f8a4b;
+      color: #ffffff;
+      padding: 16px 16px 14px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .header-sub {
+      margin-top: 8px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      background: #132038;
-      border: 1px solid #24375c;
-      padding: 14px 16px;
-      border-radius: 12px;
-      margin-bottom: 14px;
-    }
-    .topbar h1 { font-size: 20px; }
-    .topbar .sub { font-size: 13px; color: #94a3b8; }
-    .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-    select, input, button {
-      font-family: inherit;
-      font-size: 14px;
-      border-radius: 8px;
-      border: 1px solid #2e4570;
-      background: #0f172a;
-      color: #f8fafc;
-      padding: 9px 11px;
-    }
-    button { cursor: pointer; font-weight: 600; }
-    .btn-green { background: #10b981; color: #052e16; border-color: transparent; }
-    .btn-teal { background: #14b8a6; color: #042f2e; border-color: transparent; }
-    .btn-red { background: #ef4444; color: #ffffff; border-color: transparent; }
-    .btn-dark { background: #1e293b; color: #e2e8f0; }
-
-    .summary {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    @media (max-width: 640px) { .summary { grid-template-columns: 1fr; } }
-    .box {
-      background: #132038;
-      border: 1px solid #24375c;
-      border-radius: 10px;
-      padding: 12px;
-    }
-    .box small { display: block; color: #94a3b8; font-size: 12px; }
-    .box strong { display: block; font-size: 18px; margin-top: 4px; }
-
-    .nav {
-      display: flex;
       gap: 8px;
-      margin-bottom: 14px;
       flex-wrap: wrap;
     }
-    .nav button {
-      background: #132038;
-      color: #cbd5e1;
-      border: 1px solid #24375c;
-      padding: 9px 14px;
+    .header-sub select, .header-sub button {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 8px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
     }
-    .nav button.active {
-      background: #14b8a6;
-      color: #042f2e;
-      border-color: #14b8a6;
+    .header-sub select option {
+      color: #111827;
+      background: #ffffff;
     }
-
-    .card {
-      background: #132038;
-      border: 1px solid #24375c;
-      border-radius: 12px;
-      padding: 16px;
+    .tabs {
+      display: flex;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex: 0 0 auto;
+      padding: 14px 18px;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      font-size: 15px;
+      font-weight: 700;
+      color: #4b5563;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .tab-btn.active {
+      color: #0f8a4b;
+      border-bottom-color: #0f8a4b;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 18px 16px;
+    }
+    .section-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #111827;
       margin-bottom: 14px;
     }
-    .card h2 { font-size: 16px; margin-bottom: 12px; }
-    .row {
+    .overview-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 10px;
-      margin-bottom: 10px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
     }
-    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .stat-box {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 20px 14px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+    }
+    .stat-label {
+      font-size: 14px;
+      color: #4b5563;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .stat-num {
+      font-size: 24px;
+      font-weight: 800;
+    }
+    .c-green { color: #0f8a4b; }
+    .c-red { color: #ef4444; }
+    .c-amber { color: #f59e0b; }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .btn-green {
+      background: #0f8a4b;
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 15px 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn-green:active { opacity: 0.9; }
+    .btn-outline {
+      background: #ffffff;
+      color: #111827;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-danger {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+    }
+    .card h3 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #111827;
+    }
+    .muted {
+      color: #4b5563;
+      font-size: 15px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #4b5563;
+      margin-bottom: 4px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #111827;
+      background: #ffffff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
     th, td {
       text-align: left;
-      padding: 9px 8px;
-      border-bottom: 1px solid #24375c;
+      padding: 10px 6px;
+      border-bottom: 1px solid #e5e7eb;
       font-size: 14px;
     }
-    th { color: #94a3b8; font-size: 12px; }
-    .empty { color: #94a3b8; font-size: 14px; padding: 10px 0; }
-    .low { color: #fca5a5; font-weight: 700; }
-    .ok { color: #86efac; font-weight: 700; }
-    .chat-log {
-      background: #0f172a;
-      border: 1px solid #24375c;
+    th {
+      color: #6b7280;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #f59e0b;
+      color: #ffffff;
+      border: none;
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+      cursor: pointer;
+      z-index: 30;
+    }
+    .chat-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
       border-radius: 10px;
       padding: 12px;
-      min-height: 140px;
-      max-height: 300px;
+      min-height: 120px;
+      max-height: 280px;
       overflow-y: auto;
       margin-bottom: 10px;
       font-size: 14px;
     }
-    .chat-line { margin-bottom: 8px; }
-    .who-user { color: #5eead4; font-weight: 700; }
-    .who-ai { color: #fde68a; font-weight: 700; }
+    .chat-msg { margin-bottom: 8px; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div>
-        <h1>KoboLedger</h1>
-        <div class="sub" id="txtSub">Simple global ledger - record entries first</div>
+  <div class="header">
+    <h1>KoboLedger</h1>
+    <div class="header-sub">
+      <select id="langSelect" aria-label="Language" onchange="setLang(this.value)">
+        <option value="en">English</option>
+        <option value="fr">Francais</option>
+        <option value="es">Espanol</option>
+        <option value="pt">Portugues</option>
+        <option value="sw">Kiswahili</option>
+        <option value="ha">Hausa</option>
+        <option value="yo">Yoruba</option>
+        <option value="ig">Igbo</option>
+      </select>
+      <select id="curSelect" aria-label="Currency" onchange="setCur(this.value)">
+        <option value="NGN">NGN (₦)</option>
+        <option value="USD">USD ($)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="XAF">XAF (FCFA)</option>
+        <option value="XOF">XOF (CFA)</option>
+        <option value="KES">KES</option>
+        <option value="GHS">GHS</option>
+        <option value="ZAR">ZAR (R)</option>
+        <option value="CLP">CLP ($)</option>
+        <option value="BRL">BRL (R$)</option>
+        <option value="INR">INR</option>
+        <option value="CNY">CNY</option>
+        <option value="AED">AED</option>
+      </select>
+      <button type="button" id="btnExport" onclick="exportData()">Backup</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button type="button" class="tab-btn active" id="tabBtn-dashboard" onclick="openTab('dashboard')">Dashboard</button>
+    <button type="button" class="tab-btn" id="tabBtn-inventory" onclick="openTab('inventory')">Inventory</button>
+    <button type="button" class="tab-btn" id="tabBtn-sale" onclick="openTab('sale')">New Sale</button>
+    <button type="button" class="tab-btn" id="tabBtn-debt" onclick="openTab('debt')">Debt Tracker</button>
+    <button type="button" class="tab-btn" id="tabBtn-ai" onclick="openTab('ai')">AI</button>
+  </div>
+
+  <div class="container">
+    <!-- DASHBOARD -->
+    <div id="view-dashboard">
+      <div class="section-title" id="t-overview">Business Overview</div>
+
+      <div class="overview-grid">
+        <div class="stat-box">
+          <div class="stat-label" id="t-salesToday">Total Sales (Today)</div>
+          <div class="stat-num c-green" id="valSalesToday">₦0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label" id="t-estProfit">Estimated Profit</div>
+          <div class="stat-num c-green" id="valProfit">₦0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label" id="t-debtOwed">Total Debt Owed</div>
+          <div class="stat-num c-red" id="valDebt">₦0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label" id="t-lowCount">Low Stock Items</div>
+          <div class="stat-num c-amber" id="valLowCount">0</div>
+        </div>
       </div>
-      <div class="controls">
-        <select id="langPick" aria-label="Language">
-          <option value="en">English</option>
-          <option value="fr">Francais</option>
-          <option value="es">Espanol</option>
-          <option value="pt">Portugues</option>
-          <option value="sw">Kiswahili</option>
-          <option value="ha">Hausa</option>
-        </select>
-        <select id="currencyPick" aria-label="Currency">
-          <option value="NGN">NGN</option>
-          <option value="USD">USD ($)</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option value="XAF">XAF (FCFA)</option>
-          <option value="XOF">XOF (CFA)</option>
-          <option value="KES">KES</option>
-          <option value="GHS">GHS</option>
-          <option value="ZAR">ZAR (R)</option>
-          <option value="CLP">CLP ($)</option>
-          <option value="BRL">BRL (R$)</option>
-          <option value="INR">INR</option>
-          <option value="CNY">CNY</option>
-          <option value="AED">AED</option>
-        </select>
-        <button type="button" class="btn-dark" id="btnBackup">Save Backup</button>
+
+      <div class="section-title" id="t-quickActions">Quick Actions</div>
+      <div class="quick-grid">
+        <button type="button" class="btn-green" id="btnQuickSale" onclick="openTab('sale')">+ Record Sale</button>
+        <button type="button" class="btn-green" id="btnQuickStock" onclick="openTab('inventory')">Manage Stock</button>
+      </div>
+
+      <div class="section-title" id="t-lowAlerts">Low Stock Alerts</div>
+      <div id="lowAlertsBox" class="muted">All stock levels are optimal.</div>
+
+      <div class="card" style="margin-top:18px;">
+        <h3 id="t-recentTx">Recent Entries</h3>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th id="th-date">Date</th>
+                <th id="th-type">Type</th>
+                <th id="th-note">Note</th>
+                <th id="th-amt">Amount</th>
+                <th id="th-act">Action</th>
+              </tr>
+            </thead>
+            <tbody id="recentTxBody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <div class="summary">
-      <div class="box"><small id="lblIn">Money In</small><strong id="sumIn" style="color:#4ade80;">0</strong></div>
-      <div class="box"><small id="lblOut">Money Out</small><strong id="sumOut" style="color:#f87171;">0</strong></div>
-      <div class="box"><small id="lblBal">Balance</small><strong id="sumBal">0</strong></div>
-    </div>
-
-    <div class="nav">
-      <button type="button" id="tabBtn-record" class="active">Record</button>
-      <button type="button" id="tabBtn-cart">Cart</button>
-      <button type="button" id="tabBtn-stock">Stock</button>
-      <button type="button" id="tabBtn-help">Assistant</button>
-    </div>
-
-    <div id="tab-record">
+    <!-- INVENTORY -->
+    <div id="view-inventory" style="display:none;">
+      <div class="section-title" id="t-invTitle">Inventory</div>
       <div class="card">
-        <h2 id="lblRecordTitle">Record Entry</h2>
-        <div class="row">
+        <h3 id="t-addStock">Add Stock Item</h3>
+        <div class="form-row">
           <div>
-            <small id="lblKind" style="display:block;color:#94a3b8;margin-bottom:4px;">Kind</small>
-            <select id="recType" style="width:100%;">
-              <option value="in" id="optIn">Money In (Sale / Received)</option>
-              <option value="out" id="optOut">Money Out (Expense / Bought)</option>
-              <option value="debt" id="optDebt">Owing / Credit</option>
+            <label id="l-itemName">Item Name</label>
+            <input type="text" id="invName" placeholder="e.g. Rice Bag" />
+          </div>
+          <div>
+            <label id="l-sellPrice">Selling Price</label>
+            <input type="number" step="0.01" id="invPrice" placeholder="5000" />
+          </div>
+          <div>
+            <label id="l-costPrice">Cost Price</label>
+            <input type="number" step="0.01" id="invCost" placeholder="3500" />
+          </div>
+          <div>
+            <label id="l-qty">Stock Qty</label>
+            <input type="number" min="0" id="invQty" value="10" />
+          </div>
+          <div>
+            <label id="l-lowAt">Low Alert At</label>
+            <input type="number" min="0" id="invLow" value="3" />
+          </div>
+        </div>
+        <button type="button" class="btn-green" id="btnSaveInv" onclick="saveStock()">Save Item</button>
+      </div>
+
+      <div class="card">
+        <h3 id="t-stockList">Stock Items</h3>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th id="th-item">Item</th>
+                <th id="th-price">Price</th>
+                <th id="th-qty">Qty</th>
+                <th id="th-status">Status</th>
+                <th id="th-sact">Action</th>
+              </tr>
+            </thead>
+            <tbody id="invTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW SALE / CART -->
+    <div id="view-sale" style="display:none;">
+      <div class="section-title" id="t-saleTitle">New Sale</div>
+      <div class="card">
+        <h3 id="t-quickRecord">Record Sale / Expense</h3>
+        <div class="form-row">
+          <div>
+            <label id="l-entryKind">Entry Type</label>
+            <select id="saleKind">
+              <option value="sale" id="o-sale">Sale (+)</option>
+              <option value="expense" id="o-expense">Expense (-)</option>
+              <option value="debt" id="o-debt">Debt / Credit</option>
             </select>
           </div>
           <div>
-            <small id="lblAmount" style="display:block;color:#94a3b8;margin-bottom:4px;">Amount</small>
-            <input id="recAmount" type="number" step="0.01" placeholder="5000" style="width:100%;" />
+            <label id="l-fromInv">From Stock (Optional)</label>
+            <select id="saleInvPick" onchange="pickStockForSale(this.value)">
+              <option value="">-- Custom --</option>
+            </select>
           </div>
           <div>
-            <small id="lblNote" style="display:block;color:#94a3b8;margin-bottom:4px;">What For / Name</small>
-            <input id="recNote" type="text" placeholder="e.g. Rice, transport, Musa" style="width:100%;" />
+            <label id="l-desc">Item / Customer Note</label>
+            <input type="text" id="saleNote" placeholder="e.g. Customer Musa" />
+          </div>
+          <div>
+            <label id="l-sqty">Qty</label>
+            <input type="number" min="1" id="saleQty" value="1" />
+          </div>
+          <div>
+            <label id="l-sprice">Amount / Price</label>
+            <input type="number" step="0.01" id="saleAmt" placeholder="5000" />
           </div>
         </div>
-        <button type="button" class="btn-green" id="btnAddRecord" style="width:100%;">Record Now</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn-green" id="btnAddCart" onclick="addToCart()">+ Add to Cart</button>
+          <button type="button" class="btn-outline" id="btnDirectSave" onclick="recordDirectEntry()">Record Directly</button>
+        </div>
       </div>
 
       <div class="card">
-        <h2 id="lblListTitle">Recorded Entries</h2>
+        <h3 id="t-cartBox">Sale Cart</h3>
         <div style="overflow-x:auto;">
           <table>
             <thead>
               <tr>
-                <th id="thDate">Date</th>
-                <th id="thKind">Kind</th>
-                <th id="thDetails">Details</th>
-                <th id="thAmount">Amount</th>
-                <th id="thAction">Action</th>
+                <th id="th-citem">Item</th>
+                <th id="th-cqty">Qty</th>
+                <th id="th-ctot">Total</th>
+                <th id="th-cdel">Remove</th>
               </tr>
             </thead>
-            <tbody id="recList"></tbody>
+            <tbody id="cartBody"></tbody>
           </table>
+        </div>
+        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+          <strong style="font-size:17px;"><span id="t-totalLabel">Total</span>: <span id="cartTotalVal">₦0</span></strong>
+          <button type="button" class="btn-green" id="btnCheckout" onclick="completeCartSale()">Complete Sale</button>
         </div>
       </div>
     </div>
 
-    <div id="tab-cart" style="display:none;">
+    <!-- DEBT TRACKER -->
+    <div id="view-debt" style="display:none;">
+      <div class="section-title" id="t-debtTitle">Debt Tracker</div>
       <div class="card">
-        <h2 id="lblCartTitle">Cart</h2>
-        <div class="row">
-          <input id="cartName" type="text" placeholder="Item name" />
-          <input id="cartQty" type="number" min="1" value="1" placeholder="Qty" />
-          <input id="cartPrice" type="number" step="0.01" placeholder="Price" />
-          <button type="button" class="btn-teal" id="btnAddCart">Add Item</button>
-        </div>
-        <div style="overflow-x:auto;">
-          <table>
-            <thead>
-              <tr>
-                <th id="thCartItem">Item name</th>
-                <th id="thCartQty">Qty</th>
-                <th id="thCartPrice">Price</th>
-                <th id="thCartTotal">Total</th>
-                <th id="thCartDel">Action</th>
-              </tr>
-            </thead>
-            <tbody id="cartList"></tbody>
-          </table>
-        </div>
-        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <strong><span id="lblCartTotal">Cart Total</span>: <span id="cartTotal">0</span></strong>
-          <div style="display:flex;gap:8px;">
-            <button type="button" class="btn-dark" id="btnClearCart">Clear</button>
-            <button type="button" class="btn-green" id="btnCheckout">Save Cart as Sale</button>
+        <h3 id="t-addDebt">Record Debt</h3>
+        <div class="form-row">
+          <div>
+            <label id="l-dperson">Person / Customer</label>
+            <input type="text" id="debtName" placeholder="e.g. Chinedu" />
+          </div>
+          <div>
+            <label id="l-damt">Amount Owed</label>
+            <input type="number" step="0.01" id="debtAmt" placeholder="10000" />
+          </div>
+          <div>
+            <label id="l-dnote">Note</label>
+            <input type="text" id="debtNote" placeholder="e.g. Goods on credit" />
           </div>
         </div>
+        <button type="button" class="btn-green" id="btnSaveDebt" onclick="addDebtEntry()">+ Save Debt</button>
       </div>
-    </div>
 
-    <div id="tab-stock" style="display:none;">
       <div class="card">
-        <h2 id="lblStockTitle">Stock</h2>
-        <div class="row">
-          <input id="stkName" type="text" placeholder="Item name" />
-          <input id="stkPrice" type="number" step="0.01" placeholder="Price" />
-          <input id="stkQty" type="number" min="0" value="5" placeholder="In Hand" />
-          <input id="stkLow" type="number" min="0" value="2" placeholder="Low" />
-          <button type="button" class="btn-teal" id="btnSaveStock">Save Item</button>
-        </div>
+        <h3 id="t-debtList">Unpaid &amp; Settled Debts</h3>
         <div style="overflow-x:auto;">
           <table>
             <thead>
               <tr>
-                <th id="thStkItem">Item name</th>
-                <th id="thStkPrice">Price</th>
-                <th id="thStkHand">In Hand</th>
-                <th id="thStkStatus">Status</th>
-                <th id="thStkAction">Action</th>
+                <th id="th-dperson">Person</th>
+                <th id="th-dnote">Note</th>
+                <th id="th-damt">Amount</th>
+                <th id="th-dstat">Status</th>
+                <th id="th-dact">Action</th>
               </tr>
             </thead>
-            <tbody id="stkList"></tbody>
+            <tbody id="debtBody"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <div id="tab-help" style="display:none;">
+    <!-- AI -->
+    <div id="view-ai" style="display:none;">
+      <div class="section-title" id="t-aiTitle">AI Assistant</div>
       <div class="card">
-        <h2 id="lblAssistantTitle">Assistant</h2>
-        <div class="chat-log" id="chatLog">
-          <div class="chat-line"><span class="who-ai">Assistant:</span> Ask about your balance, low stock, or summary.</div>
+        <div class="chat-box" id="aiChatBox">
+          <div class="chat-msg"><strong>AI:</strong> Ask me about today's sales, estimated profit, debts owed, or low stock.</div>
         </div>
         <div style="display:flex;gap:8px;">
-          <input id="chatMsg" type="text" placeholder="Ask about balance, stock, or summary..." style="flex:1;" />
-          <button type="button" class="btn-teal" id="btnSendChat">Send</button>
+          <input type="text" id="aiPrompt" placeholder="Ask about sales, profit, debts, or stock..." />
+          <button type="button" class="btn-green" id="btnAskAi" onclick="askAi()">Ask</button>
         </div>
       </div>
     </div>
   </div>
 
+  <button type="button" class="fab" id="fabAdd" title="Quick Record" onclick="openTab('sale')">+</button>
+
   <script>
-    var CURRENCIES = ${JSON.stringify(CURRENCIES)};
-    var I18N = ${JSON.stringify(I18N)};
-    var STORE_KEY = "koboledger_global_v2";
+    var RATES = {
+      NGN: 1,
+      USD: 1 / 1600,
+      EUR: 1 / 1730,
+      GBP: 1 / 2030,
+      XAF: 615 / 1730,
+      XOF: 615 / 1730,
+      KES: 130 / 1600,
+      GHS: 15.5 / 1600,
+      ZAR: 18 / 1600,
+      CLP: 960 / 1600,
+      BRL: 5.7 / 1600,
+      INR: 84 / 1600,
+      CNY: 7.2 / 1600,
+      AED: 3.67 / 1600
+    };
 
-    function detectLang() {
-      try {
-        var nav = (navigator.language || "en").toLowerCase().slice(0, 2);
-        return I18N[nav] ? nav : "en";
-      } catch (e) {
-        return "en";
+    var SYMBOLS = {
+      NGN: "₦",
+      USD: "$",
+      EUR: "€",
+      GBP: "£",
+      XAF: "FCFA ",
+      XOF: "CFA ",
+      KES: "KSh ",
+      GHS: "GHS ",
+      ZAR: "R",
+      CLP: "$",
+      BRL: "R$",
+      INR: "INR ",
+      CNY: "CNY ",
+      AED: "AED "
+    };
+
+    var LANGS = {
+      en: {
+        overview: "Business Overview",
+        salesToday: "Total Sales (Today)",
+        estProfit: "Estimated Profit",
+        debtOwed: "Total Debt Owed",
+        lowCount: "Low Stock Items",
+        quickActions: "Quick Actions",
+        recSale: "+ Record Sale",
+        manageStock: "Manage Stock",
+        lowAlerts: "Low Stock Alerts",
+        optimal: "All stock levels are optimal.",
+        tabDash: "Dashboard",
+        tabInv: "Inventory",
+        tabSale: "New Sale",
+        tabDebt: "Debt Tracker",
+        tabAi: "AI"
+      },
+      fr: {
+        overview: "Apercu de l'activite",
+        salesToday: "Ventes totales (Aujourd'hui)",
+        estProfit: "Benefice estime",
+        debtOwed: "Dettes dues",
+        lowCount: "Stock faible",
+        quickActions: "Actions rapides",
+        recSale: "+ Enregistrer vente",
+        manageStock: "Gerer le stock",
+        lowAlerts: "Alertes stock faible",
+        optimal: "Tous les niveaux de stock sont bons.",
+        tabDash: "Tableau",
+        tabInv: "Inventaire",
+        tabSale: "Nouvelle vente",
+        tabDebt: "Dettes",
+        tabAi: "IA"
+      },
+      es: {
+        overview: "Resumen del negocio",
+        salesToday: "Ventas de hoy",
+        estProfit: "Ganancia estimada",
+        debtOwed: "Deuda pendiente",
+        lowCount: "Stock bajo",
+        quickActions: "Acciones rapidas",
+        recSale: "+ Registrar venta",
+        manageStock: "Gestionar stock",
+        lowAlerts: "Alertas de stock bajo",
+        optimal: "Todos los niveles de stock estan bien.",
+        tabDash: "Panel",
+        tabInv: "Inventario",
+        tabSale: "Nueva venta",
+        tabDebt: "Deudas",
+        tabAi: "IA"
+      },
+      pt: {
+        overview: "Resumo do negocio",
+        salesToday: "Vendas (Hoje)",
+        estProfit: "Lucro estimado",
+        debtOwed: "Dividas em aberto",
+        lowCount: "Estoque baixo",
+        quickActions: "Acoes rapidas",
+        recSale: "+ Registrar venda",
+        manageStock: "Gerir estoque",
+        lowAlerts: "Alertas de estoque baixo",
+        optimal: "Todos os niveis de estoque estao otimos.",
+        tabDash: "Painel",
+        tabInv: "Estoque",
+        tabSale: "Nova venda",
+        tabDebt: "Dividas",
+        tabAi: "IA"
+      },
+      sw: {
+        overview: "Muhtasari wa Biashara",
+        salesToday: "Mauzo Yote (Leo)",
+        estProfit: "Faida Inayokadiriwa",
+        debtOwed: "Madeni Yaliyobaki",
+        lowCount: "Stoku Chache",
+        quickActions: "Hatua za Haraka",
+        recSale: "+ Rekodi Mauzo",
+        manageStock: "Simamia Stoku",
+        lowAlerts: "Tahadhari ya Stoku Chache",
+        optimal: "Viwango vyote vya stoku viko sawa.",
+        tabDash: "Dashibodi",
+        tabInv: "Stoku",
+        tabSale: "Mauzo Mapya",
+        tabDebt: "Madeni",
+        tabAi: "AI"
+      },
+      ha: {
+        overview: "Bayani Kan Kasuwanci",
+        salesToday: "Jimillar Sayarwa (Yau)",
+        estProfit: "Riba Da Ake Sa Rai",
+        debtOwed: "Bashin Da Ake Bi",
+        lowCount: "Kaya Masu Karanci",
+        quickActions: "Ayyuka Cikin Gaggawa",
+        recSale: "+ Rubuta Sayarwa",
+        manageStock: "Kula Da Haja",
+        lowAlerts: "Fadakarwar Karancin Haja",
+        optimal: "Dukkan kaya suna daidai.",
+        tabDash: "Dashboard",
+        tabInv: "Haja",
+        tabSale: "Sabuwar Sayarwa",
+        tabDebt: "Bashi",
+        tabAi: "AI"
+      },
+      yo: {
+        overview: "Akopọ Iṣowo",
+        salesToday: "Àpapọ̀ Títà (Òní)",
+        estProfit: "Èrè Tí A Fojú Sùn",
+        debtOwed: "Gbèsè Tí Ó Kù",
+        lowCount: "Ọjà Tí Ó Dín Kù",
+        quickActions: "Àwọn Ìgbésẹ̀ Kíákíá",
+        recSale: "+ Kọ Títà",
+        manageStock: "Ṣàkóso Ọjà",
+        lowAlerts: "Ìkìlọ̀ Ọjà Dídín Kù",
+        optimal: "Gbogbo ọjà wà ní ìwọ̀n tó dára.",
+        tabDash: "Dashboard",
+        tabInv: "Ọjà",
+        tabSale: "Títà Tuntun",
+        tabDebt: "Gbèsè",
+        tabAi: "AI"
+      },
+      ig: {
+        overview: "Nchịkọta Azụmaahịa",
+        salesToday: "Ngụkọta Ahịa (Taa)",
+        estProfit: "Uru E Chepụtara",
+        debtOwed: "Ụgwọ Fọdụrụ",
+        lowCount: "Ngwaahịa Dị Ala",
+        quickActions: "Omume Ngwa Ngwa",
+        recSale: "+ Dekọọ Ahịa",
+        manageStock: "Jikwaa Ngwaahịa",
+        lowAlerts: "Ịdọ Aka Ná Ntị Ngwaahịa Dị Ala",
+        optimal: "Ọnụọgụgụ ngwaahịa niile dị mma.",
+        tabDash: "Dashboard",
+        tabInv: "Ngwaahịa",
+        tabSale: "Ahịa Ọhụrụ",
+        tabDebt: "Ụgwọ",
+        tabAi: "AI"
       }
-    }
+    };
 
-    var data = {
-      lang: detectLang(),
+    var KEY = "koboledger_ui_v1";
+    var state = {
+      lang: "en",
       currency: "NGN",
-      records: [],
-      cart: [],
-      stock: []
+      entries: [],
+      inventory: [],
+      cart: []
     };
 
     try {
-      var saved = localStorage.getItem(STORE_KEY);
-      if (saved) {
-        var parsed = JSON.parse(saved);
-        if (parsed && typeof parsed === "object") {
-          data.lang = I18N[parsed.lang] ? parsed.lang : detectLang();
-          data.currency = CURRENCIES[parsed.currency] ? parsed.currency : "NGN";
-          data.records = Array.isArray(parsed.records) ? parsed.records : [];
-          data.cart = Array.isArray(parsed.cart) ? parsed.cart : [];
-          data.stock = Array.isArray(parsed.stock) ? parsed.stock : [];
+      var raw = localStorage.getItem(KEY);
+      if (raw) {
+        var p = JSON.parse(raw);
+        if (p && typeof p === "object") {
+          if (LANGS[p.lang]) state.lang = p.lang;
+          if (RATES[p.currency]) state.currency = p.currency;
+          if (Array.isArray(p.entries)) state.entries = p.entries;
+          if (Array.isArray(p.inventory)) state.inventory = p.inventory;
+          if (Array.isArray(p.cart)) state.cart = p.cart;
         }
+      } else {
+        var navLang = (navigator.language || "en").toLowerCase().slice(0, 2);
+        if (LANGS[navLang]) state.lang = navLang;
       }
     } catch (e) {}
 
-    function t(key) {
-      var pack = I18N[data.lang] || I18N.en;
-      return pack[key] || I18N.en[key] || key;
+    function tr(key) {
+      var pack = LANGS[state.lang] || LANGS.en;
+      return pack[key] || LANGS.en[key] || key;
     }
 
-    function saveLocal() {
-      try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch (e) {}
-      render();
-    }
-
-    function curObj() {
-      return CURRENCIES[data.currency] || CURRENCIES.NGN;
-    }
-
-    function toNGN(val) {
-      return Number(val || 0) / curObj().rateFromNGN;
-    }
-
-    function fmtMoney(ngnAmount) {
-      var c = curObj();
-      var v = Number(ngnAmount || 0) * c.rateFromNGN;
-      var noDec = { NGN: 1, XAF: 1, XOF: 1, KES: 1, CLP: 1, INR: 1 };
-      var dec = noDec[data.currency] ? 0 : 2;
-      return c.symbol + v.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    function setTxt(id, txt) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = txt;
     }
 
     function esc(s) {
-      return String(s || "").replace(/[&<>"']/g, function(ch) {
-        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
+      return String(s || "").replace(/[&<>"']/g, function(c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
       });
     }
 
-    function setText(id, val) {
-      var el = document.getElementById(id);
-      if (el) el.textContent = val;
+    function fmt(ngn) {
+      var rate = RATES[state.currency] || 1;
+      var sym = SYMBOLS[state.currency] || (state.currency + " ");
+      var val = Number(ngn || 0) * rate;
+      var noDec = { NGN: 1, XAF: 1, XOF: 1, KES: 1, CLP: 1, INR: 1 };
+      var dec = noDec[state.currency] ? 0 : 2;
+      return sym + val.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
     }
 
-    function applyLanguageChrome() {
-      document.documentElement.lang = data.lang;
-      setText("txtSub", t("subtitle"));
-      setText("btnBackup", t("backup"));
-
-      setText("lblIn", t("moneyIn"));
-      setText("lblOut", t("moneyOut"));
-      setText("lblBal", t("balance"));
-
-      setText("tabBtn-record", t("tabRecord"));
-      setText("tabBtn-cart", t("tabCart"));
-      setText("tabBtn-stock", t("tabStock"));
-      setText("tabBtn-help", t("tabHelp"));
-
-      setText("lblRecordTitle", t("recordTitle"));
-      setText("lblKind", t("kind"));
-      setText("optIn", t("inOpt"));
-      setText("optOut", t("outOpt"));
-      setText("optDebt", t("debtOpt"));
-      setText("lblAmount", t("amount"));
-      setText("lblNote", t("note"));
-      setText("btnAddRecord", t("recordNow"));
-
-      setText("lblListTitle", t("listTitle"));
-      setText("thDate", t("date"));
-      setText("thKind", t("kind"));
-      setText("thDetails", t("details"));
-      setText("thAmount", t("amount"));
-      setText("thAction", t("action"));
-
-      setText("lblCartTitle", t("cartTitle"));
-      var cartNameEl = document.getElementById("cartName");
-      var cartQtyEl = document.getElementById("cartQty");
-      var cartPriceEl = document.getElementById("cartPrice");
-      if (cartNameEl) cartNameEl.placeholder = t("itemName");
-      if (cartQtyEl) cartQtyEl.placeholder = t("qty");
-      if (cartPriceEl) cartPriceEl.placeholder = t("price");
-      setText("btnAddCart", t("addItem"));
-      setText("thCartItem", t("itemName"));
-      setText("thCartQty", t("qty"));
-      setText("thCartPrice", t("price"));
-      setText("thCartTotal", t("total"));
-      setText("thCartDel", t("action"));
-      setText("lblCartTotal", t("cartTotal"));
-      setText("btnClearCart", t("clear"));
-      setText("btnCheckout", t("saveCartSale"));
-
-      setText("lblStockTitle", t("stockTitle"));
-      var stkNameEl = document.getElementById("stkName");
-      var stkPriceEl = document.getElementById("stkPrice");
-      var stkQtyEl = document.getElementById("stkQty");
-      var stkLowEl = document.getElementById("stkLow");
-      if (stkNameEl) stkNameEl.placeholder = t("itemName");
-      if (stkPriceEl) stkPriceEl.placeholder = t("price");
-      if (stkQtyEl) stkQtyEl.placeholder = t("inHand");
-      if (stkLowEl) stkLowEl.placeholder = t("low");
-      setText("btnSaveStock", t("saveItem"));
-      setText("thStkItem", t("itemName"));
-      setText("thStkPrice", t("price"));
-      setText("thStkHand", t("inHand"));
-      setText("thStkStatus", t("status"));
-      setText("thStkAction", t("action"));
-
-      setText("lblAssistantTitle", t("assistantTitle"));
-      var chatMsgEl = document.getElementById("chatMsg");
-      if (chatMsgEl) chatMsgEl.placeholder = t("askPlaceholder");
-      setText("btnSendChat", t("send"));
+    function toNgn(val) {
+      var rate = RATES[state.currency] || 1;
+      return Number(val || 0) / rate;
     }
 
-    function showTab(name) {
-      var tabs = ["record", "cart", "stock", "help"];
-      for (var i = 0; i < tabs.length; i++) {
-        var k = tabs[i];
-        var panel = document.getElementById("tab-" + k);
-        var btn = document.getElementById("tabBtn-" + k);
-        if (panel) panel.style.display = (k === name) ? "block" : "none";
-        if (btn) btn.className = (k === name) ? "active" : "";
+    function save() {
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      render();
+    }
+
+    function openTab(tabName) {
+      var names = ["dashboard", "inventory", "sale", "debt", "ai"];
+      for (var i = 0; i < names.length; i++) {
+        var n = names[i];
+        var view = document.getElementById("view-" + n);
+        var btn = document.getElementById("tabBtn-" + n);
+        if (view) view.style.display = (n === tabName) ? "block" : "none";
+        if (btn) btn.className = "tab-btn" + (n === tabName ? " active" : "");
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function setLang(l) {
+      if (LANGS[l]) {
+        state.lang = l;
+        save();
       }
     }
 
-    document.getElementById("tabBtn-record").onclick = function() { showTab("record"); };
-    document.getElementById("tabBtn-cart").onclick = function() { showTab("cart"); };
-    document.getElementById("tabBtn-stock").onclick = function() { showTab("stock"); };
-    document.getElementById("tabBtn-help").onclick = function() { showTab("help"); };
-
-    document.getElementById("langPick").onchange = function(e) {
-      data.lang = e.target.value;
-      saveLocal();
-    };
-
-    document.getElementById("currencyPick").onchange = function(e) {
-      data.currency = e.target.value;
-      saveLocal();
-    };
-
-    document.getElementById("btnAddRecord").onclick = function() {
-      var type = document.getElementById("recType").value;
-      var amt = parseFloat(document.getElementById("recAmount").value);
-      var note = document.getElementById("recNote").value.trim();
-      if (isNaN(amt) || amt <= 0) {
-        alert(t("enterAmount"));
-        return;
+    function setCur(c) {
+      if (RATES[c]) {
+        state.currency = c;
+        save();
       }
-      data.records.unshift({
-        id: "r_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
-        date: new Date().toLocaleDateString(),
-        type: type,
-        note: note || "-",
-        amountNGN: toNGN(amt)
-      });
-      document.getElementById("recAmount").value = "";
-      document.getElementById("recNote").value = "";
-      saveLocal();
-    };
+    }
 
-    window.delRecord = function(id) {
-      data.records = data.records.filter(function(r) { return r.id !== id; });
-      saveLocal();
-    };
-
-    document.getElementById("btnAddCart").onclick = function() {
-      var name = document.getElementById("cartName").value.trim();
-      var qty = parseInt(document.getElementById("cartQty").value, 10);
-      var price = parseFloat(document.getElementById("cartPrice").value);
-      if (!name || isNaN(qty) || qty < 1 || isNaN(price) || price <= 0) {
-        alert(t("enterItem"));
-        return;
+    function pickStockForSale(id) {
+      if (!id) return;
+      for (var i = 0; i < state.inventory.length; i++) {
+        if (state.inventory[i].id === id) {
+          var item = state.inventory[i];
+          var noteEl = document.getElementById("saleNote");
+          var amtEl = document.getElementById("saleAmt");
+          var rate = RATES[state.currency] || 1;
+          if (noteEl) noteEl.value = item.name;
+          if (amtEl) amtEl.value = Number((item.priceNGN * rate).toFixed(2));
+          break;
+        }
       }
-      data.cart.push({ name: name, qty: qty, priceNGN: toNGN(price) });
-      document.getElementById("cartName").value = "";
-      document.getElementById("cartQty").value = "1";
-      document.getElementById("cartPrice").value = "";
-      saveLocal();
-    };
+    }
 
-    window.delCart = function(idx) {
-      data.cart.splice(idx, 1);
-      saveLocal();
-    };
+    function recordDirectEntry() {
+      try {
+        var kind = document.getElementById("saleKind").value;
+        var note = document.getElementById("saleNote").value.trim();
+        var qty = parseInt(document.getElementById("saleQty").value, 10) || 1;
+        var amt = parseFloat(document.getElementById("saleAmt").value);
+        if (isNaN(amt) || amt <= 0) {
+          alert("Enter a valid amount.");
+          return;
+        }
+        var totalNGN = toNgn(amt) * qty;
+        var costNGN = totalNGN * 0.7;
+        for (var i = 0; i < state.inventory.length; i++) {
+          if (note && state.inventory[i].name.toLowerCase() === note.toLowerCase()) {
+            costNGN = state.inventory[i].costNGN * qty;
+            if (kind === "sale") {
+              state.inventory[i].qty = Math.max(0, state.inventory[i].qty - qty);
+            }
+            break;
+          }
+        }
+        state.entries.unshift({
+          id: "e_" + Date.now() + "_" + Math.floor(Math.random() * 9999),
+          date: new Date().toISOString().slice(0, 10),
+          type: kind,
+          party: note || (kind === "sale" ? "Sale" : (kind === "expense" ? "Expense" : "Debt")),
+          amountNGN: totalNGN,
+          costNGN: costNGN,
+          status: kind === "debt" ? "unpaid" : "paid"
+        });
+        document.getElementById("saleNote").value = "";
+        document.getElementById("saleAmt").value = "";
+        document.getElementById("saleQty").value = "1";
+        save();
+        openTab("dashboard");
+      } catch (e) {
+        alert("Error saving entry: " + e.message);
+      }
+    }
 
-    document.getElementById("btnClearCart").onclick = function() {
-      data.cart = [];
-      saveLocal();
-    };
+    function addToCart() {
+      try {
+        var note = document.getElementById("saleNote").value.trim();
+        var qty = parseInt(document.getElementById("saleQty").value, 10) || 1;
+        var amt = parseFloat(document.getElementById("saleAmt").value);
+        if (!note || isNaN(amt) || amt <= 0) {
+          alert("Enter item name and price.");
+          return;
+        }
+        state.cart.push({
+          name: note,
+          qty: qty,
+          priceNGN: toNgn(amt)
+        });
+        document.getElementById("saleNote").value = "";
+        document.getElementById("saleAmt").value = "";
+        document.getElementById("saleQty").value = "1";
+        save();
+      } catch (e) {
+        alert("Error adding to cart: " + e.message);
+      }
+    }
 
-    document.getElementById("btnCheckout").onclick = function() {
-      if (!data.cart.length) return;
+    function delCart(idx) {
+      state.cart.splice(idx, 1);
+      save();
+    }
+
+    function completeCartSale() {
+      if (!state.cart.length) return;
       var totalNGN = 0;
       var names = [];
-      for (var i = 0; i < data.cart.length; i++) {
-        var item = data.cart[i];
-        totalNGN += item.priceNGN * item.qty;
-        names.push(item.name + " x" + item.qty);
-        for (var j = 0; j < data.stock.length; j++) {
-          if (data.stock[j].name.toLowerCase() === item.name.toLowerCase()) {
-            data.stock[j].qty = Math.max(0, data.stock[j].qty - item.qty);
+      for (var i = 0; i < state.cart.length; i++) {
+        var it = state.cart[i];
+        totalNGN += it.priceNGN * it.qty;
+        names.push(it.name + " x" + it.qty);
+        for (var j = 0; j < state.inventory.length; j++) {
+          if (state.inventory[j].name.toLowerCase() === it.name.toLowerCase()) {
+            state.inventory[j].qty = Math.max(0, state.inventory[j].qty - it.qty);
           }
         }
       }
-      data.records.unshift({
-        id: "r_" + Date.now(),
-        date: new Date().toLocaleDateString(),
-        type: "in",
-        note: names.join(", "),
-        amountNGN: totalNGN
+      state.entries.unshift({
+        id: "e_" + Date.now(),
+        date: new Date().toISOString().slice(0, 10),
+        type: "sale",
+        party: names.join(", "),
+        amountNGN: totalNGN,
+        costNGN: totalNGN * 0.7,
+        status: "paid"
       });
-      data.cart = [];
-      saveLocal();
-      showTab("record");
-    };
+      state.cart = [];
+      save();
+      openTab("dashboard");
+    }
 
-    document.getElementById("btnSaveStock").onclick = function() {
-      var name = document.getElementById("stkName").value.trim();
-      var price = parseFloat(document.getElementById("stkPrice").value);
-      var qty = parseInt(document.getElementById("stkQty").value, 10);
-      var low = parseInt(document.getElementById("stkLow").value, 10);
-      if (!name || isNaN(price) || price <= 0 || isNaN(qty) || qty < 0) {
-        alert(t("enterStock"));
-        return;
+    function saveStock() {
+      try {
+        var name = document.getElementById("invName").value.trim();
+        var price = parseFloat(document.getElementById("invPrice").value);
+        var cost = parseFloat(document.getElementById("invCost").value);
+        var qty = parseInt(document.getElementById("invQty").value, 10);
+        var low = parseInt(document.getElementById("invLow").value, 10);
+        if (!name || isNaN(price) || price <= 0 || isNaN(qty) || qty < 0) {
+          alert("Enter item name, price, and quantity.");
+          return;
+        }
+        state.inventory.push({
+          id: "i_" + Date.now() + "_" + Math.floor(Math.random() * 9999),
+          name: name,
+          priceNGN: toNgn(price),
+          costNGN: isNaN(cost) ? toNgn(price) * 0.7 : toNgn(cost),
+          qty: qty,
+          low: isNaN(low) ? 3 : low
+        });
+        document.getElementById("invName").value = "";
+        document.getElementById("invPrice").value = "";
+        document.getElementById("invCost").value = "";
+        document.getElementById("invQty").value = "10";
+        save();
+      } catch (e) {
+        alert("Error saving stock: " + e.message);
       }
-      data.stock.push({
-        id: "s_" + Date.now(),
-        name: name,
-        priceNGN: toNGN(price),
-        qty: qty,
-        low: isNaN(low) ? 2 : low
-      });
-      document.getElementById("stkName").value = "";
-      document.getElementById("stkPrice").value = "";
-      document.getElementById("stkQty").value = "5";
-      saveLocal();
-    };
+    }
 
-    window.addOneStock = function(id) {
-      for (var i = 0; i < data.stock.length; i++) {
-        if (data.stock[i].id === id) data.stock[i].qty += 1;
+    function bumpStock(id, delta) {
+      for (var i = 0; i < state.inventory.length; i++) {
+        if (state.inventory[i].id === id) {
+          state.inventory[i].qty = Math.max(0, state.inventory[i].qty + delta);
+        }
       }
-      saveLocal();
-    };
+      save();
+    }
 
-    window.delStock = function(id) {
-      data.stock = data.stock.filter(function(s) { return s.id !== id; });
-      saveLocal();
-    };
+    function delStock(id) {
+      state.inventory = state.inventory.filter(function(x) { return x.id !== id; });
+      save();
+    }
 
-    document.getElementById("btnBackup").onclick = function() {
-      var blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    function addDebtEntry() {
+      try {
+        var person = document.getElementById("debtName").value.trim();
+        var amt = parseFloat(document.getElementById("debtAmt").value);
+        var note = document.getElementById("debtNote").value.trim();
+        if (!person || isNaN(amt) || amt <= 0) {
+          alert("Enter person name and amount.");
+          return;
+        }
+        state.entries.unshift({
+          id: "d_" + Date.now(),
+          date: new Date().toISOString().slice(0, 10),
+          type: "debt",
+          party: person + (note ? (" - " + note) : ""),
+          amountNGN: toNgn(amt),
+          costNGN: 0,
+          status: "unpaid"
+        });
+        document.getElementById("debtName").value = "";
+        document.getElementById("debtAmt").value = "";
+        document.getElementById("debtNote").value = "";
+        save();
+      } catch (e) {
+        alert("Error saving debt: " + e.message);
+      }
+    }
+
+    function settleDebt(id) {
+      for (var i = 0; i < state.entries.length; i++) {
+        if (state.entries[i].id === id) {
+          state.entries[i].status = "paid";
+          state.entries[i].type = "sale";
+        }
+      }
+      save();
+    }
+
+    function delEntry(id) {
+      state.entries = state.entries.filter(function(e) { return e.id !== id; });
+      save();
+    }
+
+    function exportData() {
+      var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
       var url = URL.createObjectURL(blob);
       var a = document.createElement("a");
       a.href = url;
       a.download = "koboledger-backup.json";
       a.click();
       URL.revokeObjectURL(url);
-    };
+    }
 
-    document.getElementById("btnSendChat").onclick = function() {
-      var inp = document.getElementById("chatMsg");
-      var q = inp.value.trim();
+    function askAi() {
+      var inp = document.getElementById("aiPrompt");
+      var q = inp ? inp.value.trim() : "";
       if (!q) return;
-      var log = document.getElementById("chatLog");
-
-      var moneyIn = 0;
-      var moneyOut = 0;
-      for (var i = 0; i < data.records.length; i++) {
-        if (data.records[i].type === "in") moneyIn += data.records[i].amountNGN;
-        if (data.records[i].type === "out") moneyOut += data.records[i].amountNGN;
+      var box = document.getElementById("aiChatBox");
+      var today = new Date().toISOString().slice(0, 10);
+      var salesToday = 0;
+      var profit = 0;
+      var debt = 0;
+      for (var i = 0; i < state.entries.length; i++) {
+        var e = state.entries[i];
+        if (e.type === "sale") {
+          if (e.date === today) salesToday += e.amountNGN;
+          profit += (e.amountNGN - (e.costNGN || 0));
+        }
+        if (e.type === "expense") {
+          profit -= e.amountNGN;
+        }
+        if (e.type === "debt" && e.status !== "paid") {
+          debt += e.amountNGN;
+        }
       }
-      var lowItems = [];
-      for (var j = 0; j < data.stock.length; j++) {
-        if (data.stock[j].qty <= data.stock[j].low) {
-          lowItems.push(data.stock[j].name + " (" + data.stock[j].qty + ")");
+      var lowNames = [];
+      for (var j = 0; j < state.inventory.length; j++) {
+        if (state.inventory[j].qty <= state.inventory[j].low) {
+          lowNames.push(state.inventory[j].name + " (" + state.inventory[j].qty + ")");
+        }
+      }
+      var reply = "Today Sales: " + fmt(salesToday) +
+        " | Est. Profit: " + fmt(profit) +
+        " | Debt Owed: " + fmt(debt) +
+        " | Low Stock: " + (lowNames.length ? lowNames.join(", ") : "None");
+
+      if (box) {
+        box.innerHTML += '<div class="chat-msg"><strong>You:</strong> ' + esc(q) + '</div>';
+        box.innerHTML += '<div class="chat-msg"><strong>AI:</strong> ' + esc(reply) + '</div>';
+        box.scrollTop = box.scrollHeight;
+      }
+      inp.value = "";
+    }
+
+    function render() {
+      var ls = document.getElementById("langSelect");
+      var cs = document.getElementById("curSelect");
+      if (ls) ls.value = state.lang;
+      if (cs) cs.value = state.currency;
+
+      setTxt("t-overview", tr("overview"));
+      setTxt("t-salesToday", tr("salesToday"));
+      setTxt("t-estProfit", tr("estProfit"));
+      setTxt("t-debtOwed", tr("debtOwed"));
+      setTxt("t-lowCount", tr("lowCount"));
+      setTxt("t-quickActions", tr("quickActions"));
+      setTxt("btnQuickSale", tr("recSale"));
+      setTxt("btnQuickStock", tr("manageStock"));
+      setTxt("t-lowAlerts", tr("lowAlerts"));
+
+      setTxt("tabBtn-dashboard", tr("tabDash"));
+      setTxt("tabBtn-inventory", tr("tabInv"));
+      setTxt("tabBtn-sale", tr("tabSale"));
+      setTxt("tabBtn-debt", tr("tabDebt"));
+      setTxt("tabBtn-ai", tr("tabAi"));
+
+      var today = new Date().toISOString().slice(0, 10);
+      var salesToday = 0;
+      var profit = 0;
+      var debtOwed = 0;
+
+      for (var i = 0; i < state.entries.length; i++) {
+        var en = state.entries[i];
+        if (en.type === "sale") {
+          if (en.date === today) salesToday += en.amountNGN;
+          profit += (en.amountNGN - (en.costNGN || 0));
+        } else if (en.type === "expense") {
+          profit -= en.amountNGN;
+        } else if (en.type === "debt" && en.status !== "paid") {
+          debtOwed += en.amountNGN;
         }
       }
 
-      var reply = t("moneyIn") + ": " + fmtMoney(moneyIn) + " | " +
-        t("moneyOut") + ": " + fmtMoney(moneyOut) + " | " +
-        t("balance") + ": " + fmtMoney(moneyIn - moneyOut);
-      if (lowItems.length) {
-        reply += " | " + t("low") + " " + t("stockTitle") + ": " + lowItems.join(", ");
+      var lowItems = [];
+      for (var j = 0; j < state.inventory.length; j++) {
+        if (state.inventory[j].qty <= state.inventory[j].low) {
+          lowItems.push(state.inventory[j]);
+        }
       }
 
-      log.innerHTML += '<div class="chat-line"><span class="who-user">' + esc(q) + '</span></div>';
-      log.innerHTML += '<div class="chat-line"><span class="who-ai">' + esc(t("tabHelp")) + ':</span> ' + esc(reply) + '</div>';
-      inp.value = "";
-      log.scrollTop = log.scrollHeight;
-    };
+      setTxt("valSalesToday", fmt(salesToday));
+      setTxt("valProfit", fmt(profit));
+      setTxt("valDebt", fmt(debtOwed));
+      setTxt("valLowCount", String(lowItems.length));
 
-    function render() {
-      document.getElementById("langPick").value = data.lang;
-      document.getElementById("currencyPick").value = data.currency;
-      applyLanguageChrome();
-
-      var totalIn = 0;
-      var totalOut = 0;
-      var recHtml = "";
-      for (var i = 0; i < data.records.length; i++) {
-        var r = data.records[i];
-        if (r.type === "in") totalIn += r.amountNGN;
-        if (r.type === "out") totalOut += r.amountNGN;
-        var kindTxt = r.type === "in" ? t("moneyIn") : (r.type === "out" ? t("moneyOut") : t("debtOpt"));
-        recHtml += "<tr>" +
-          "<td>" + esc(r.date) + "</td>" +
-          "<td>" + esc(kindTxt) + "</td>" +
-          "<td>" + esc(r.note) + "</td>" +
-          "<td>" + fmtMoney(r.amountNGN) + "</td>" +
-          '<td><button type="button" class="btn-red" onclick="delRecord(\'' + r.id + '\')">X</button></td>' +
-          "</tr>";
-      }
-      setText("sumIn", fmtMoney(totalIn));
-      setText("sumOut", fmtMoney(totalOut));
-      setText("sumBal", fmtMoney(totalIn - totalOut));
-      var recListEl = document.getElementById("recList");
-      if (recListEl) {
-        recListEl.innerHTML = recHtml || '<tr><td colspan="5" class="empty">' + esc(t("emptyRec")) + '</td></tr>';
+      var alertsEl = document.getElementById("lowAlertsBox");
+      if (alertsEl) {
+        if (!lowItems.length) {
+          alertsEl.textContent = tr("optimal");
+        } else {
+          alertsEl.innerHTML = lowItems.map(function(it) {
+            return '<div style="margin-bottom:4px;color:#b91c1c;font-weight:600;">' +
+              esc(it.name) + ": " + it.qty + " left</div>";
+          }).join("");
+        }
       }
 
-      var cartHtml = "";
+      var txBody = document.getElementById("recentTxBody");
+      if (txBody) {
+        if (!state.entries.length) {
+          txBody.innerHTML = '<tr><td colspan="5" class="muted">No entries recorded yet.</td></tr>';
+        } else {
+          txBody.innerHTML = state.entries.slice(0, 15).map(function(en) {
+            return "<tr>" +
+              "<td>" + esc(en.date) + "</td>" +
+              "<td>" + esc(String(en.type || "").toUpperCase()) + "</td>" +
+              "<td>" + esc(en.party) + "</td>" +
+              "<td><strong>" + fmt(en.amountNGN) + "</strong></td>" +
+              '<td><button type="button" class="btn-danger" onclick="delEntry(\'' + en.id + '\')">X</button></td>' +
+              "</tr>";
+          }).join("");
+        }
+      }
+
+      var invPick = document.getElementById("saleInvPick");
+      if (invPick) {
+        invPick.innerHTML = '<option value="">-- Custom --</option>' +
+          state.inventory.map(function(it) {
+            return '<option value="' + it.id + '">' + esc(it.name) + ' (' + it.qty + ')</option>';
+          }).join("");
+      }
+
+      var invBody = document.getElementById("invTableBody");
+      if (invBody) {
+        if (!state.inventory.length) {
+          invBody.innerHTML = '<tr><td colspan="5" class="muted">No stock items added yet.</td></tr>';
+        } else {
+          invBody.innerHTML = state.inventory.map(function(it) {
+            var isLow = it.qty <= it.low;
+            return "<tr>" +
+              "<td><strong>" + esc(it.name) + "</strong></td>" +
+              "<td>" + fmt(it.priceNGN) + "</td>" +
+              "<td>" + it.qty + "</td>" +
+              '<td style="font-weight:700;color:' + (isLow ? "#dc2626" : "#0f8a4b") + '">' + (isLow ? "Low" : "OK") + "</td>" +
+              '<td><button type="button" class="btn-outline" onclick="bumpStock(\'' + it.id + '\', 1)">+1</button> ' +
+              '<button type="button" class="btn-danger" onclick="delStock(\'' + it.id + '\')">X</button></td>' +
+              "</tr>";
+          }).join("");
+        }
+      }
+
+      var cartBody = document.getElementById("cartBody");
       var cartSum = 0;
-      for (var c = 0; c < data.cart.length; c++) {
-        var ci = data.cart[c];
-        var sub = ci.priceNGN * ci.qty;
-        cartSum += sub;
-        cartHtml += "<tr>" +
-          "<td>" + esc(ci.name) + "</td>" +
-          "<td>" + ci.qty + "</td>" +
-          "<td>" + fmtMoney(ci.priceNGN) + "</td>" +
-          "<td>" + fmtMoney(sub) + "</td>" +
-          '<td><button type="button" class="btn-red" onclick="delCart(' + c + ')">X</button></td>' +
-          "</tr>";
+      if (cartBody) {
+        if (!state.cart.length) {
+          cartBody.innerHTML = '<tr><td colspan="4" class="muted">Cart is empty.</td></tr>';
+        } else {
+          cartBody.innerHTML = state.cart.map(function(c, idx) {
+            var sub = c.priceNGN * c.qty;
+            cartSum += sub;
+            return "<tr>" +
+              "<td>" + esc(c.name) + "</td>" +
+              "<td>" + c.qty + "</td>" +
+              "<td>" + fmt(c.priceNGN) + "</td>" +
+              '<td><button type="button" class="btn-danger" onclick="delCart(' + idx + ')">X</button></td>' +
+              "</tr>";
+          }).join("");
+        }
       }
-      var cartListEl = document.getElementById("cartList");
-      if (cartListEl) {
-        cartListEl.innerHTML = cartHtml || '<tr><td colspan="5" class="empty">' + esc(t("emptyCart")) + '</td></tr>';
-      }
-      setText("cartTotal", fmtMoney(cartSum));
+      setTxt("cartTotalVal", fmt(cartSum));
 
-      var stkHtml = "";
-      for (var s = 0; s < data.stock.length; s++) {
-        var st = data.stock[s];
-        var isLow = st.qty <= st.low;
-        stkHtml += "<tr>" +
-          "<td>" + esc(st.name) + "</td>" +
-          "<td>" + fmtMoney(st.priceNGN) + "</td>" +
-          "<td>" + st.qty + "</td>" +
-          '<td class="' + (isLow ? "low" : "ok") + '">' + esc(isLow ? t("low") : t("ok")) + "</td>" +
-          '<td><button type="button" class="btn-teal" onclick="addOneStock(\'' + st.id + '\')">+1</button> ' +
-          '<button type="button" class="btn-red" onclick="delStock(\'' + st.id + '\')">X</button></td>' +
-          "</tr>";
-      }
-      var stkListEl = document.getElementById("stkList");
-      if (stkListEl) {
-        stkListEl.innerHTML = stkHtml || '<tr><td colspan="5" class="empty">' + esc(t("emptyStock")) + '</td></tr>';
+      var debtBody = document.getElementById("debtBody");
+      if (debtBody) {
+        var debts = state.entries.filter(function(e) { return e.type === "debt"; });
+        if (!debts.length) {
+          debtBody.innerHTML = '<tr><td colspan="5" class="muted">No debts recorded.</td></tr>';
+        } else {
+          debtBody.innerHTML = debts.map(function(d) {
+            var unpaid = d.status !== "paid";
+            return "<tr>" +
+              "<td><strong>" + esc(d.party) + "</strong></td>" +
+              "<td>" + esc(d.date) + "</td>" +
+              "<td>" + fmt(d.amountNGN) + "</td>" +
+              '<td style="font-weight:700;color:' + (unpaid ? "#dc2626" : "#0f8a4b") + '">' + (unpaid ? "Unpaid" : "Paid") + "</td>" +
+              '<td>' + (unpaid ? '<button type="button" class="btn-outline" onclick="settleDebt(\'' + d.id + '\')">Mark Paid</button> ' : '') +
+              '<button type="button" class="btn-danger" onclick="delEntry(\'' + d.id + '\')">X</button></td>' +
+              "</tr>";
+          }).join("");
+        }
       }
     }
 
@@ -1065,10 +1249,10 @@ export default {
       });
     }
     if (url.pathname === "/api/health") {
-      return Response.json({ ok: true, app: "koboledger-global-v2" });
+      return Response.json({ ok: true, app: "koboledger-ui" });
     }
     return new Response(INDEX_HTML, {
       headers: { "Content-Type": "text/html; charset=utf-8" }
     });
   }
-};     
+};
